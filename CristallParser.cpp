@@ -1,32 +1,11 @@
 #include "CristallParser.h"
 
-void CristallParser::addGrammar(string Label, string Char)
-{
-    if (OperationList.empty()) OperationCount =0;
-    OperationList[OperationCount][0] = Label;
-    OperationList[OperationCount][1]= Char;
-    OperationCount++;
-    RunRule.push_back(0);
-}
-void CristallParser::addGrammarTo(string Label,string StartChar, string EndChar, int RunRuleInside)
-{
-    if (OperationList.empty()) OperationCount =0;
-    OperationList[OperationCount][0] = Label;
-    OperationList[OperationCount][1]= StartChar;
-    OperationList[OperationCount][2]= EndChar;
-    OperationCount++;
-    RunRule.push_back(RunRuleInside);
-}
+
 void CristallParser::addElement(string Label, string Value)
 {
     int c = Summary.size();
     Summary[c]['Label'] =Label;
     Summary[c]['Value'] =Value;
-}
-void CristallParser::addRule(string YourName, int Rule)
-{
-    Options[Rule] = 1;
-    Options_name[Rule] = YourName;
 }
 void CristallParser::setData(string Data)
 {
@@ -62,7 +41,7 @@ void  CristallParser::parseData(string RawData)
                     pos = po+OperationList[i][2].length()-1;
                 }
             }
-            else if (isdigit(RawData[pos]))
+            else if (OperationList[i][1].substr(0,7)=="#number")
             {
                 digit="";
                 for (int id = pos; id<=RawData.length(); id++)
@@ -73,16 +52,16 @@ void  CristallParser::parseData(string RawData)
                     }
                     else
                     {
-                        if (digit.length()>0  and Options[CristallRuleNumbers]==true)
+                        if (digit.length()>0 )
                         {
-                            addElement(Options_name[CristallRuleNumbers],digit);
+                            addElement(OperationList[i][0],digit);
                         }
                         pos = id;
                         break;
                     }
                 }
             }
-            else if (isalpha(RawData[pos]))
+            else if (OperationList[i][1].substr(0,6)=="#alpha")
             {
                 alpha= "";
                 for (int id = pos; id<=RawData.length(); id++)
@@ -93,11 +72,10 @@ void  CristallParser::parseData(string RawData)
                     }
                     else
                     {
-                        if (alpha.length()>0  and Options[CristallRuleWord]==true)
+                        if (alpha.length()>0 )
                         {
-                            addElement(Options_name[CristallRuleWord],alpha);
+                            addElement(OperationList[i][0],alpha);
                         }
-
                         pos = pos+alpha.length();
 
                         break;

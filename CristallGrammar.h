@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cctype>
 #include <map>
+#include "CristallHeader.h"
 using namespace std;
 
 class CristallGrammar
@@ -15,8 +16,6 @@ public:
     void addRule(string YourName, int Rule);
 protected:
     int OperationCount;
-    int Options[2];
-    string Options_name[2];
     map <int, map<int, string> > OperationList;
     vector <int> RunRule;
 private:

@@ -21,6 +21,12 @@ void CristallGrammar::addGrammarTo(string Label,string StartChar, string EndChar
 }
 void CristallGrammar::addRule(string YourName, int Rule)
 {
-    Options[Rule] = 1;
-    Options_name[Rule] = YourName;
+   cout<<Rule<<endl;
+    switch(Rule){
+            case CristallRuleNumbers:
+                addGrammar(YourName, "#number");
+                break;
+            case CristallRuleWord:
+                addGrammar(YourName, "#alpha");
+    }
 }

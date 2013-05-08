@@ -8,11 +8,11 @@ using namespace std;
 
 class CristallValues
 {
-    public:
+public:
 
-    protected:
-         map < int, map < const char, string > > Summary;
-    private:
+protected:
+    map < int, map < const char, string > > Summary;
+private:
 };
 
 #endif // CRISTALLVALUES_H
