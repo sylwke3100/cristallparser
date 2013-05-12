@@ -13,8 +13,8 @@ void CristallParser::setData(string Data)
 }
 void  CristallParser::parseData(string RawData)
 {
-    string digit = "";
-    string alpha = "";
+    string digit;
+    string alpha;;
     for (int pos = 0; pos<RawData.length(); pos++)
     {
         for (int i =0; i<OperationList.size(); i++)
@@ -43,7 +43,8 @@ void  CristallParser::parseData(string RawData)
             }
             else if (OperationList[i][1].substr(0,7)=="#number")
             {
-                digit="";
+                digit.clear();
+                int Limit = Vals.ConvertStringtoInt(OperationList[i][1].substr(7));
                 for (int id = pos; id<=RawData.length(); id++)
                 {
                     if(isdigit(RawData[id]) and id <RawData.length())
@@ -52,18 +53,19 @@ void  CristallParser::parseData(string RawData)
                     }
                     else
                     {
-                        if (digit.length()>0 )
+                        if (digit.length()>0 and (digit.length() == Limit or Limit == CristallNoLimit))
                         {
                             addElement(OperationList[i][0],digit);
+                            pos = id;
                         }
-                        pos = id;
                         break;
                     }
                 }
             }
             else if (OperationList[i][1].substr(0,6)=="#alpha")
             {
-                alpha= "";
+                alpha.clear();
+                int Limit = Vals.ConvertStringtoInt(OperationList[i][1].substr(6));
                 for (int id = pos; id<=RawData.length(); id++)
                 {
                     if(isalpha(RawData[id]) and id <RawData.length())
@@ -72,12 +74,11 @@ void  CristallParser::parseData(string RawData)
                     }
                     else
                     {
-                        if (alpha.length()>0 )
+                        if (alpha.length()>0 and (alpha.length() == Limit or Limit == CristallNoLimit) )
                         {
                             addElement(OperationList[i][0],alpha);
+                            pos = pos+alpha.length();
                         }
-                        pos = pos+alpha.length();
-
                         break;
                     }
                 }

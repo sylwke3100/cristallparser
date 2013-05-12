@@ -5,5 +5,6 @@
 #define CristallRuleWord 1
 #define CristallRunGrammarInside 2
 #define CristallRunNoGrammarInside 3
+#define CristallNoLimit 0
 
 #endif

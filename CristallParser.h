@@ -7,6 +7,7 @@
 #include <map>
 #include "CristallHeader.h"
 #include "CristallGrammar.h"
+#include "CristallValues.h"
 using namespace std;
 
 class CristallParser : public CristallGrammar
@@ -16,12 +17,10 @@ private:
     string RawData;
     void addElement(string Label, string Value); // Adding Element to output map
     void parseData(string RawData);               // Parse Data from Source
+    CristallValues Vals;
 public:
-
-
     void setData(string Data);
     map < int, map < const char, string > > run();
-
 
 
 };

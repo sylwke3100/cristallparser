@@ -6,6 +6,7 @@
 #include <cctype>
 #include <map>
 #include "CristallHeader.h"
+#include "CristallValues.h"
 using namespace std;
 
 class CristallGrammar
@@ -13,7 +14,7 @@ class CristallGrammar
 public:
     void addGrammar(string Label,string Char);
     void addGrammarTo(string Label, string StartChar, string EndChar, int RunRuleInside);
-    void addRule(string YourName, int Rule);
+    void addRule(string YourName, int Rule, int Limit);
 protected:
     int OperationCount;
     map <int, map<int, string> > OperationList;

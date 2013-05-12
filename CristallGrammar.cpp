@@ -19,15 +19,18 @@ void CristallGrammar::addGrammarTo(string Label,string StartChar, string EndChar
     OperationCount++;
     RunRule.push_back(RunRuleInside);
 }
-void CristallGrammar::addRule(string YourName, int Rule)
+void CristallGrammar::addRule(string YourName, int Rule, int Limit)
 {
-    cout<<Rule<<endl;
+    CristallValues * temp = new CristallValues;
+    string query;
     switch(Rule)
     {
     case CristallRuleNumbers:
-        addGrammar(YourName, "#number");
+        query = "#number"+temp->ConvertInttoString(Limit);
         break;
     case CristallRuleWord:
-        addGrammar(YourName, "#alpha");
+        query = "#alpha"+temp->ConvertInttoString(Limit);
     }
+    addGrammar(YourName, query);
+    delete temp;
 }
