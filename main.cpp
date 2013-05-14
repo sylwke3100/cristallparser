@@ -1,5 +1,5 @@
 #include <iostream>
-#include "src/CristallParser.h"
+#include "CristallParser.h"
 #include <vector>
 #include <map>
 using namespace std;

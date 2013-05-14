@@ -7,6 +7,7 @@ void CristallParser::addElement(string Label, string Value)
 	Summary[c]['Label'] =Label;
 	Summary[c]['Value'] =Value;
 }
+
 int CristallParser::searchInvoke(string& Val)
 {
 	if(Val.substr(0,7)=="#number") return 7;
@@ -14,6 +15,7 @@ int CristallParser::searchInvoke(string& Val)
 	if (Val.substr(0,9)=="#alpnumer") return 9;
 	return 0;
 }
+
 int CristallParser::detectInvoke(char& Val)
 {
 	if(isdigit(Val))
@@ -22,6 +24,7 @@ int CristallParser::detectInvoke(char& Val)
 		return 6;
 	return 0;
 }
+
 bool CristallParser::checkAlfanum(string const& str)
 {
 	bool alpha{false};
@@ -32,10 +35,12 @@ bool CristallParser::checkAlfanum(string const& str)
 	}
 	return numerical && alpha;
 }
+
 void CristallParser::setData(string Data)
 {
 	RawData = Data;
 }
+
 void  CristallParser::parseData(string RawData)
 {
 	string digitalpha;
@@ -91,6 +96,7 @@ void  CristallParser::parseData(string RawData)
 		}
 	}
 }
+
 map < int, map < const char, string > > CristallParser::run()
 {
 	parseData(this->RawData);
