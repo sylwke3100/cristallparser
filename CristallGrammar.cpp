@@ -30,6 +30,10 @@ void CristallGrammar::addRule(string YourName, int Rule, int Limit)
         break;
     case CristallRuleWord:
         query = "#alpha"+temp->ConvertInttoString(Limit);
+        break;
+    case CristallRuleAlphaNum:
+        query = "#alpnumer"+temp->ConvertInttoString(Limit);
+        break;
     }
     addGrammar(YourName, query);
     delete temp;

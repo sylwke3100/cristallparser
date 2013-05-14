@@ -17,8 +17,9 @@ private:
     string RawData;
     void addElement(string Label, string Value); // Adding Element to output map
     void parseData(string RawData);               // Parse Data from Source
-    int  searchInvoke(string Val);
-    int  detectInvoke(char Val);
+    int  searchInvoke(string& Val);
+    int  detectInvoke(char& Val);
+    int  checkAlfanum(string& Value);
     CristallValues Vals;
 public:
     void setData(string Data);

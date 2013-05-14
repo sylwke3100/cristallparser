@@ -7,18 +7,31 @@ void CristallParser::addElement(string Label, string Value)
     Summary[c]['Label'] =Label;
     Summary[c]['Value'] =Value;
 }
-int CristallParser::searchInvoke(string Val)
+int CristallParser::searchInvoke(string& Val)
 {
     if(Val.substr(0,7)=="#number") return 7;
     if (Val.substr(0,6)=="#alpha") return 6;
+    if (Val.substr(0,9)=="#alpnumer") return 9;
     return 0;
 }
-int CristallParser::detectInvoke(char Val)
+int CristallParser::detectInvoke(char& Val)
 {
     if(isdigit(Val))
         return 7;
     if(isalpha(Val))
         return 6;
+    return 0;
+}
+int CristallParser::checkAlfanum(string& Value)
+{
+    int alpha = 0;
+    int num = 0;
+    for(int i =0; i<Value.length(); i++)
+    {
+        if (isalpha(Value[i])) alpha++;
+        else if (isdigit(Value[i])) num++;
+    }
+    if(alpha>0 and num>0) return 1;
     return 0;
 }
 void CristallParser::setData(string Data)
@@ -61,16 +74,16 @@ void  CristallParser::parseData(string RawData)
                 int Limit = Vals.ConvertStringtoInt(OperationList[i][1].substr(inv));
                 for (int id = pos; id<=RawData.length(); id++)
                 {
-                    if(detectInvoke(RawData[id])==inv and id <RawData.length())
+                    if( (inv==9 and detectInvoke(RawData[id])== 6 or detectInvoke(RawData[id])==7 ) or detectInvoke(RawData[id])==inv and id <RawData.length())
                     {
                         digitalpha+=RawData[id];
                     }
                     else
                     {
-                        if ( digitalpha.length()>0 and ( digitalpha.length() == Limit or Limit == CristallNoLimit))
+                        if ( digitalpha.length()>0 and ( digitalpha.length() == Limit or Limit == CristallNoLimit)  and (inv!= 9 or ( inv == 9 and checkAlfanum(digitalpha) == true)  ) )
                         {
-                            addElement(OperationList[i][0], digitalpha);
-                            pos = id;
+                                addElement(OperationList[i][0], digitalpha);
+                                pos = id;
                         }
                         break;
                     }
