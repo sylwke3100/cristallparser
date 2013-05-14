@@ -7,14 +7,27 @@ void CristallParser::addElement(string Label, string Value)
     Summary[c]['Label'] =Label;
     Summary[c]['Value'] =Value;
 }
+int CristallParser::searchInvoke(string Val)
+{
+    if(Val.substr(0,7)=="#number") return 7;
+    if (Val.substr(0,6)=="#alpha") return 6;
+    return 0;
+}
+int CristallParser::detectInvoke(char Val)
+{
+    if(isdigit(Val))
+        return 7;
+    if(isalpha(Val))
+        return 6;
+    return 0;
+}
 void CristallParser::setData(string Data)
 {
     RawData = Data;
 }
 void  CristallParser::parseData(string RawData)
 {
-    string digit;
-    string alpha;;
+    string digitalpha;
     for (int pos = 0; pos<RawData.length(); pos++)
     {
         for (int i =0; i<OperationList.size(); i++)
@@ -41,48 +54,29 @@ void  CristallParser::parseData(string RawData)
                     pos = po+OperationList[i][2].length()-1;
                 }
             }
-            else if (OperationList[i][1].substr(0,7)=="#number")
+            else if (searchInvoke(OperationList[i][1])>=5)
             {
-                digit.clear();
-                int Limit = Vals.ConvertStringtoInt(OperationList[i][1].substr(7));
+                digitalpha.clear();
+                int inv = searchInvoke(OperationList[i][1]);
+                int Limit = Vals.ConvertStringtoInt(OperationList[i][1].substr(inv));
                 for (int id = pos; id<=RawData.length(); id++)
                 {
-                    if(isdigit(RawData[id]) and id <RawData.length())
+                    if(detectInvoke(RawData[id])==inv and id <RawData.length())
                     {
-                        digit+=RawData[id];
+                        digitalpha+=RawData[id];
                     }
                     else
                     {
-                        if (digit.length()>0 and (digit.length() == Limit or Limit == CristallNoLimit))
+                        if ( digitalpha.length()>0 and ( digitalpha.length() == Limit or Limit == CristallNoLimit))
                         {
-                            addElement(OperationList[i][0],digit);
+                            addElement(OperationList[i][0], digitalpha);
                             pos = id;
                         }
                         break;
                     }
                 }
             }
-            else if (OperationList[i][1].substr(0,6)=="#alpha")
-            {
-                alpha.clear();
-                int Limit = Vals.ConvertStringtoInt(OperationList[i][1].substr(6));
-                for (int id = pos; id<=RawData.length(); id++)
-                {
-                    if(isalpha(RawData[id]) and id <RawData.length())
-                    {
-                        alpha+=RawData[id];
-                    }
-                    else
-                    {
-                        if (alpha.length()>0 and (alpha.length() == Limit or Limit == CristallNoLimit) )
-                        {
-                            addElement(OperationList[i][0],alpha);
-                            pos = pos+alpha.length();
-                        }
-                        break;
-                    }
-                }
-            }
+
         }
     }
 }
