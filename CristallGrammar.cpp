@@ -35,6 +35,7 @@ void CristallGrammar::addRule(string YourName, int Rule, int Limit)
         query = "#alpnumer"+temp->ConvertInttoString(Limit);
         break;
     }
+    if(!YourName.empty() and !query.empty())
     addGrammar(YourName, query);
     delete temp;
 }
