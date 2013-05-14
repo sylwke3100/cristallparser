@@ -1,5 +1,8 @@
 #include "CristallGrammar.h"
 
+using namespace std;
+using namespace Cristall;
+
 CristallGrammar::CristallGrammar() : OperationCount{0}
 {
 }
@@ -21,23 +24,23 @@ void CristallGrammar::addGrammarTo(string Label,string StartChar, string EndChar
 	RunRule.push_back(RunRuleInside);
 }
 
-void CristallGrammar::addRule(string YourName, int Rule, int Limit)
+void CristallGrammar::addRule(string const& YourName, Rules Rule, int Limit)
 {
 	CristallValues * temp = new CristallValues;
 	string query;
 	switch(Rule)
 	{
-	case CristallRuleNumbers:
+	case Rules::Numbers:
 		query = "#number"+temp->ConvertInttoString(Limit);
 		break;
-	case CristallRuleWord:
+	case Rules::Letters:
 		query = "#alpha"+temp->ConvertInttoString(Limit);
 		break;
-	case CristallRuleAlphaNum:
+	case Rules::AlphaNumeric:
 		query = "#alpnumer"+temp->ConvertInttoString(Limit);
 		break;
 	}
-	if(!YourName.empty() and !query.empty())
+	if(!YourName.empty() && !query.empty())
 	addGrammar(YourName, query);
 	delete temp;
 }
