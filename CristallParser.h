@@ -15,11 +15,11 @@ class CristallParser : public CristallGrammar
 private:
 	map<int, map<const char, string>> Summary;
 	string RawData;
-	void addElement(string Label, string Value); // Adding Element to output map
+	void addElement(string Label, string Value);  // Adding Element to output map
 	void parseData(string RawData);               // Parse Data from Source
-	int  searchInvoke(string& Val);
-	int  detectInvoke(char& Val);
-	int  checkAlfanum(string& Value);
+	int searchInvoke(string& Val);
+	int detectInvoke(char& Val);
+	bool checkAlfanum(const string &str);
 	CristallValues Vals;
 public:
 	void setData(string Data);

@@ -22,17 +22,15 @@ int CristallParser::detectInvoke(char& Val)
 		return 6;
 	return 0;
 }
-int CristallParser::checkAlfanum(string& Value)
+bool CristallParser::checkAlfanum(string const& str)
 {
-	int alpha = 0;
-	int num = 0;
-	for(int i =0; i<Value.length(); i++)
-	{
-		if (isalpha(Value[i])) alpha++;
-		else if (isdigit(Value[i])) num++;
+	bool alpha{false};
+	bool numerical{false};
+	for(auto const c : str){
+		if(!alpha && isalpha(c)) alpha = true;
+		else if(!numerical && isdigit(c)) numerical = true;
 	}
-	if(alpha>0 and num>0) return 1;
-	return 0;
+	return numerical && alpha;
 }
 void CristallParser::setData(string Data)
 {
