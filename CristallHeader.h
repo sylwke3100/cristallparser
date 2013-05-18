@@ -12,7 +12,7 @@ enum class Rules{
 };
 
 enum class Limits{
-	None = -1
+	None = 0
 };
 
 }
