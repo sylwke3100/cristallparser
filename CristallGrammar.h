@@ -13,7 +13,6 @@ class CristallGrammar
 {
 public:
     CristallGrammar();
-
     void addGrammar(string Label,string Char);
     void addGrammarTo(string Label, string StartChar, string EndChar, int RunRuleInside);
     void addRule(string const& YourName, Cristall::Rules Rule, int Limit);

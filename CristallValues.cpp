@@ -23,7 +23,6 @@ int CristallValues::size()
 {
     return Summary.size();
 }
-
 string CristallValues::getElement(int Id, DataType Data)
 {
     switch(Data)

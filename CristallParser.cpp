@@ -98,8 +98,9 @@ void  CristallParser::parseData(string RawData)
     }
 }
 
-map < int, map < const char, string > > CristallParser::run()
+CristallValues CristallParser::run()
 {
     parseData(this->RawData);
-    return Summary;
+    Vals.loadData(Summary);
+    return Vals;
 }

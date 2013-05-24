@@ -23,7 +23,7 @@ private:
     CristallValues Vals;
 public:
     void setData(string Data);
-    map < int, map < const char, string > > run();
+    CristallValues run();
 
 
 };
