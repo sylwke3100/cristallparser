@@ -5,14 +5,22 @@
 namespace Cristall
 {
 
-enum class Rules{
-	Numbers			= 0x1,
-	Letters			= 0x2,
-	AlphaNumeric	= Rules::Numbers | Rules::Letters
+enum class Rules
+{
+    Numbers			= 0x1,
+    Letters			= 0x2,
+    AlphaNumeric	= Rules::Numbers | Rules::Letters
 };
 
-enum class Limits{
-	None = 0
+enum class Limits
+{
+    None = 0
+};
+
+enum class DataType
+{
+    Label = 0,
+    Value = 1
 };
 
 }
