@@ -4,8 +4,8 @@
 void CristallParser::addElement(string Label, string Value)
 {
     int c = Summary.size();
-    Summary[c]['Label'] =Label;
-    Summary[c]['Value'] =Value;
+    Summary[c][CristallValues::ValueType::Label] =Label;
+    Summary[c][CristallValues::ValueType::Value] =Value;
 }
 
 int CristallParser::searchInvoke(string& Val)

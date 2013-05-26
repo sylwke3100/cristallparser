@@ -13,7 +13,7 @@ using namespace std;
 class CristallParser : public CristallGrammar
 {
 private:
-    map<int, map<const char, string>> Summary;
+    map<int, map<CristallValues::ValueType, string>> Summary;
     string RawData;
     void addElement(string Label, string Value);  // Adding Element to output map
     void parseData(string RawData);               // Parse Data from Source
