@@ -80,7 +80,7 @@ void  CristallParser::parseData(string RawData)
                 for (int id = pos; id<=RawData.length(); id++)
                 {
                     if((inv == 9 and (detectInvoke(RawData[id])== 6 or detectInvoke(RawData[id]) == 7)) or ( detectInvoke(RawData[id])==inv and id <RawData.length())
-)
+                      )
                     {
                         digitalpha+=RawData[id];
                     }

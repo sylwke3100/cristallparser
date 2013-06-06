@@ -21,7 +21,8 @@ public:
     string getElement(int Id, DataType Data);
     void loadData(map<int, map<ValueType, string> > Data);
 
-    enum class ValueType{
+    enum class ValueType
+    {
         Label,
         Value
     };
