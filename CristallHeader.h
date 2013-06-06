@@ -23,6 +23,12 @@ enum class DataType
     Value = 1
 };
 
+enum class RunRuleInside
+{
+    Yes = 1,
+    No = 0
+};
+
 }
 
 #define CristallRuleNumbers 0
