@@ -13,20 +13,12 @@ using namespace Cristall;
 class CristallValues
 {
 public:
-    enum class ValueType;
 
     int ConvertStringtoInt(string Data);
     int size();
     string ConvertInttoString(int Data);
     string getElement(int Id, DataType Data);
-    void loadData(map<int, map<ValueType, string> > Data);
-
-    enum class ValueType
-    {
-        Label,
-        Value
-    };
-
+    void loadData(const map<int, map<ValueType, string> > & Data);
 protected:
     map < int, map < ValueType, string > > Summary;
 private:

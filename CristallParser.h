@@ -9,11 +9,12 @@
 #include "CristallGrammar.h"
 #include "CristallValues.h"
 using namespace std;
+using namespace Cristall;
 
 class CristallParser : public CristallGrammar
 {
 private:
-    map<int, map<CristallValues::ValueType, string>> Summary;
+    map<int, map<ValueType, string>> Summary;
     string RawData;
     void addElement(string Label, string Value);  // Adding Element to output map
     void parseData(string RawData);               // Parse Data from Source

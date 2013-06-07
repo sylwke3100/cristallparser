@@ -28,7 +28,11 @@ enum class RunRuleInside
     Yes = 1,
     No = 0
 };
-
+enum class ValueType
+{
+    Label,
+    Value
+};
 }
 
 
