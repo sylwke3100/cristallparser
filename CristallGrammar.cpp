@@ -12,19 +12,19 @@ void CristallGrammar::addGrammar(string Label, string Char)
     OperationList[OperationCount][0] = Label;
     OperationList[OperationCount][1]= Char;
     OperationCount++;
-    RunRule.push_back(0);
+    RunRule.push_back(RunRuleInside::No);
 }
 
-void CristallGrammar::addGrammarTo(string Label,string StartChar, string EndChar, int RunRuleInside)
+void CristallGrammar::addGrammarTo(string Label,string StartChar, string EndChar, RunRuleInside Rule)
 {
     OperationList[OperationCount][0] = Label;
     OperationList[OperationCount][1]= StartChar;
     OperationList[OperationCount][2]= EndChar;
     OperationCount++;
-    if( RunRuleInside == CristallRunGrammarInside && RunRuleInside == CristallRunNoGrammarInside)
-        RunRule.push_back(RunRuleInside);
+    if( Rule == RunRuleInside::Yes or Rule == RunRuleInside::No)
+        RunRule.push_back(Rule);
     else
-        RunRule.push_back(CristallRunNoGrammarInside);
+        RunRule.push_back(RunRuleInside::Yes);
 
 }
 

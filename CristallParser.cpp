@@ -60,9 +60,9 @@ void  CristallParser::parseData(string RawData)
                 int po =(int) RawData.find(OperationList[i][2],pos+OperationList[i][1].length()+1);
                 if (po >pos+OperationList[i][1].length())
                 {
-                    if (RunRule[i]==CristallRunNoGrammarInside)
+                    if (RunRule[i]==RunRuleInside::No)
                         addElement(OperationList[i][0],RawData.substr(pos+OperationList[i][1].length(),po-(pos+OperationList[i][1].length())));
-                    if (RunRule[i]==CristallRunGrammarInside)
+                    if (RunRule[i]==RunRuleInside::Yes)
                     {
                         addElement(OperationList[i][0],"open ->");
                         string RawValue = RawData.substr(pos+OperationList[i][1].length(),po-(pos+OperationList[i][1].length()));

@@ -9,18 +9,19 @@
 #include "CristallValues.h"
 using namespace std;
 
+using namespace Cristall;
 class CristallGrammar
 {
 public:
     CristallGrammar();
     void addGrammar(string Label,string Char);
-    void addGrammarTo(string Label, string StartChar, string EndChar, int RunRuleInside);
+    void addGrammarTo(string Label, string StartChar, string EndChar,RunRuleInside Rule);
     void addRule(string const& YourName, Cristall::Rules Rule, int Limit);
 
 protected:
     int OperationCount;
     map <int, map<int, string> > OperationList;
-    vector <int> RunRule;
+    vector <RunRuleInside> RunRule;
 private:
 };
 
