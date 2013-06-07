@@ -21,7 +21,7 @@ void CristallGrammar::addGrammarTo(string Label,string StartChar, string EndChar
     OperationList[OperationCount][1]= StartChar;
     OperationList[OperationCount][2]= EndChar;
     OperationCount++;
-    if( Rule == RunRuleInside::Yes or Rule == RunRuleInside::No)
+    if( Rule == RunRuleInside::Yes || Rule == RunRuleInside::No)
         RunRule.push_back(Rule);
     else
         RunRule.push_back(RunRuleInside::Yes);
