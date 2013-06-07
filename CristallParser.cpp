@@ -86,7 +86,7 @@ void  CristallParser::parseData(string RawData)
                     }
                     else
                     {
-                        if ( digitalpha.length()>0 and ( digitalpha.length() == Limit or Limit == CristallNoLimit)  and (inv!= 9 or ( inv == 9 and checkAlfanum(digitalpha) == true)  ) )
+                        if ( digitalpha.length()>0 and ( digitalpha.length() == Limit or Limit == (int)Limits::None)  and (inv!= 9 or ( inv == 9 and checkAlfanum(digitalpha) == true)  ) )
                         {
                             addElement(OperationList[i][0], digitalpha);
                             pos = id;
