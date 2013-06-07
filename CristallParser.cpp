@@ -48,7 +48,7 @@ void  CristallParser::parseData(string RawData)
             if (OperationList[i].size()==2 and RawData.substr(pos,OperationList[i][1].length())==OperationList[i][1])
             {
                 addElement(OperationList[i][0],OperationList[i][1]);
-                pos+=OperationList[i][1].length()-1;
+                pos+=OperationList[i][1].length();
             }
             else if (OperationList[i].size()==3 and RawData.substr(pos,OperationList[i][1].length())==OperationList[i][1])
             {
