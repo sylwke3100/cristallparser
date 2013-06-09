@@ -19,4 +19,4 @@ install(FILES ${libCristallParserHeader} DESTINATION /usr/local/include/cristall
 install(FILES ${libCristallParserLib} DESTINATION /usr/local/lib)
 
 add_custom_target(uninstall
-    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake/cmake_uninstall.cmake)
