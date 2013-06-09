@@ -28,20 +28,37 @@ string CristallValues::getElement(int Id, DataType Data)
     switch(Data)
     {
     case DataType::Label:
-        return Summary[Id][ValueType::Label];
+        return Summary[Id][DataType::Label];
         break;
     case DataType::Value:
-        return Summary[Id][ValueType::Value];
+        return Summary[Id][DataType::Value];
         break;
     }
 }
-void  CristallValues::loadData(const map < int, map < ValueType, string > >& Data)
+void  CristallValues::loadData(const map < int, map < DataType, string > >& Data)
 {
     Summary = Data;
 }
 void CristallValues::addElement(string Label, string Value)
 {
     int c = Summary.size();
-    Summary[c][ValueType::Label] =Label;
-    Summary[c][ValueType::Value] =Value;
+    Summary[c][DataType::Label] =Label;
+    Summary[c][DataType::Value] =Value;
+}
+CristallValues CristallValues::search(string What, DataType Data)
+{
+    CristallValues D;
+    map < int, map < DataType, string > > Dt;
+    for(int i =0; i<Summary.size(); i++)
+    {
+        if( this->getElement(i,Data) == What)
+        {
+            cout<<"Wykryto"<<endl;
+            int c = Dt.size();
+            Dt[c][DataType::Label] = Summary[i][DataType::Label];
+            Dt[c][DataType::Value] = Summary[i][DataType::Value];
+        }
+    }
+    D.loadData(Dt);
+    return D;
 }

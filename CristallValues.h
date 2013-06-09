@@ -18,11 +18,12 @@ public:
     int size();
     string ConvertInttoString(int Data);
     string getElement(int Id, DataType Data);
-    void loadData(const map<int, map<ValueType, string> > & Data);
+    void loadData(const map<int, map<DataType, string> > & Data);
+    CristallValues search(string What, DataType Data);
 protected:
     void addElement(string Label, string Value);
 protected:
-    map < int, map < ValueType, string > > Summary;
+    map < int, map < DataType, string > > Summary;
 private:
 };
 
