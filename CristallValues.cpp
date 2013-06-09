@@ -48,17 +48,12 @@ void CristallValues::addElement(string Label, string Value)
 CristallValues CristallValues::search(string What, DataType Data)
 {
     CristallValues D;
-    map < int, map < DataType, string > > Dt;
     for(int i =0; i<Summary.size(); i++)
     {
         if( this->getElement(i,Data) == What)
         {
-            cout<<"Wykryto"<<endl;
-            int c = Dt.size();
-            Dt[c][DataType::Label] = Summary[i][DataType::Label];
-            Dt[c][DataType::Value] = Summary[i][DataType::Value];
+            D.addElement(this->getElement(i,DataType::Label), this->getElement(i,DataType::Value));
         }
     }
-    D.loadData(Dt);
     return D;
 }
