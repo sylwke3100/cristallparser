@@ -39,3 +39,9 @@ void  CristallValues::loadData(const map < int, map < ValueType, string > >& Dat
 {
     Summary = Data;
 }
+void CristallValues::addElement(string Label, string Value)
+{
+    int c = Summary.size();
+    Summary[c][ValueType::Label] =Label;
+    Summary[c][ValueType::Value] =Value;
+}

@@ -1,12 +1,7 @@
 #include "CristallParser.h"
 
 
-void CristallParser::addElement(string Label, string Value)
-{
-    int c = Summary.size();
-    Summary[c][ValueType::Label] =Label;
-    Summary[c][ValueType::Value] =Value;
-}
+
 
 int CristallParser::searchInvoke(string& Val)
 {

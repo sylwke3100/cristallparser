@@ -19,6 +19,7 @@ public:
     string ConvertInttoString(int Data);
     string getElement(int Id, DataType Data);
     void loadData(const map<int, map<ValueType, string> > & Data);
+    void addElement(string Label, string Value);
 protected:
     map < int, map < ValueType, string > > Summary;
 private:
