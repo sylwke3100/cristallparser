@@ -11,16 +11,14 @@
 using namespace std;
 using namespace Cristall;
 
-class CristallParser : public CristallGrammar
+class CristallParser : public CristallGrammar, CristallValues
 {
 private:
-    map<int, map<ValueType, string>> Summary;
     string RawData;
     void parseData(string RawData);
     int searchInvoke(string& Val);
     int detectInvoke(char& Val);
     bool checkAlfanum(const string &str);
-    CristallValues Vals;
 public:
     void setData(string Data);
     CristallValues run();

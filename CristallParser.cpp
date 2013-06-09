@@ -71,7 +71,7 @@ void  CristallParser::parseData(string RawData)
             {
                 digitalpha.clear();
                 int inv = searchInvoke(OperationList[i][1]);
-                int Limit = Vals.ConvertStringtoInt(OperationList[i][1].substr(inv));
+                int Limit = ConvertStringtoInt(OperationList[i][1].substr(inv));
                 for (int id = pos; id<=RawData.length(); id++)
                 {
                     if((inv == 9 and (detectInvoke(RawData[id])== 6 or detectInvoke(RawData[id]) == 7)) or ( detectInvoke(RawData[id])==inv and id <RawData.length())
@@ -98,6 +98,7 @@ void  CristallParser::parseData(string RawData)
 CristallValues CristallParser::run()
 {
     parseData(this->RawData);
+    CristallValues Vals;
     Vals.loadData(Summary);
     return Vals;
 }
