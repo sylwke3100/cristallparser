@@ -28,6 +28,11 @@ enum class RunRuleInside
     Yes = 1,
     No = 0
 };
+enum class SearchType
+{
+    FullText = 0,
+    Inside = 1
+};
 }
 
 
