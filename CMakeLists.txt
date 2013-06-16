@@ -5,11 +5,13 @@ set (libCristallParserSrc
 		CristallGrammar.cpp 
 		CristallParser.cpp 
 		CristallValues.cpp
+		CristallGroup.cpp
 	)
 set (libCristallParserHeader
 		CristallGrammar.h 
 		CristallParser.h
 		CristallValues.h
+		CristallGroup.h
 	)
 set (libCristallParserLib
 		libcristallparser.so
