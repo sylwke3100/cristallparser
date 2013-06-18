@@ -3,7 +3,7 @@
 
 void CristallGroup::addGroup(string GroupName)
 {
-    if(this->checkGroup(GroupName)==false)
+    if(this->checkGroup(GroupName)==false and GroupName!="[empty]")
         GroupList.push_back(GroupName);
 }
 
@@ -12,7 +12,7 @@ string CristallGroup::getGroup(int GroupID)
     if (GroupID>-1 and GroupID<GroupList.size())
         return GroupList[GroupID];
     else
-        return "";
+        return "[empty]";
 }
 
 int CristallGroup::checkGroup(string GroupName)
