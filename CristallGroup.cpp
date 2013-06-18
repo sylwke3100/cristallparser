@@ -3,7 +3,7 @@
 
 void CristallGroup::addGroup(string GroupName)
 {
-    if(this->checkGroup(GroupName)==false and GroupName!="[empty]")
+    if(this->isGroup(GroupName)==false and GroupName!="[empty]")
         GroupList.push_back(GroupName);
 }
 
@@ -15,7 +15,7 @@ string CristallGroup::getGroup(int GroupID)
         return "[empty]";
 }
 
-int CristallGroup::checkGroup(string GroupName)
+int CristallGroup::isGroup(string GroupName)
 {
     int Is = false;
     vector<string>::iterator element;
