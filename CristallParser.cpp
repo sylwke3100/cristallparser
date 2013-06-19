@@ -10,6 +10,8 @@ int CristallParser::searchInvoke(string& Val)
 
 int CristallParser::detectInvoke(char& Val)
 {
+    if(Val == '-')
+        return 4;
     if(isdigit(Val))
         return 7;
     if(isalpha(Val))
@@ -80,6 +82,8 @@ void  CristallParser::parseData(string RawData)
                         break;
                     case 7:
                         if(courrentinv==7)
+                            digitalpha+=RawData[id];
+                        else if (courrentinv== 4 && digitalpha.length()==0)
                             digitalpha+=RawData[id];
                         break;
                     case 9:
