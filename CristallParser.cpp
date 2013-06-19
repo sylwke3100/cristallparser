@@ -67,28 +67,43 @@ void  CristallParser::parseData(string RawData)
                     pos = po+OperationList[i][2].length()-1;
                 }
             }
-            else if (searchInvoke(OperationList[i][1])>=5)
+            else if (searchInvoke(OperationList[i][1])!=0 and  detectInvoke(RawData[pos])!=0)
             {
                 digitalpha.clear();
                 int inv = searchInvoke(OperationList[i][1]);
                 int Limit = ConvertStringtoInt(OperationList[i][1].substr(inv));
+                int lid = 0;
                 for (int id = pos; id<=RawData.length(); id++)
                 {
-                    if((inv == 9 and (detectInvoke(RawData[id])== 6 or detectInvoke(RawData[id]) == 7)) or ( detectInvoke(RawData[id])==inv and id <RawData.length())
-                      )
+                    int courrentinv =  detectInvoke(RawData[id]);
+                    switch(inv)
                     {
-                        digitalpha+=RawData[id];
+                    case 6:
+                        if(courrentinv==6)
+                            digitalpha+=RawData[id];
+                        break;
+                    case 7:
+                        if(courrentinv==7)
+                            digitalpha+=RawData[id];
+                        break;
+                    case 9:
+                        if(courrentinv==7 or courrentinv==6)
+                            digitalpha+=RawData[id];
+                        break;
                     }
-                    else
+
+                if(courrentinv == 0 and digitalpha.length()>0 and (digitalpha.length()==Limit or Limit==(int)Limits::None) )
+                {
+                    if( (inv == 9 and checkAlfanum(digitalpha)==true ) or ( inv!=9 and checkAlfanum(digitalpha)==false) )
                     {
-                        if ( digitalpha.length()>0 and ( digitalpha.length() == Limit or Limit == (int)Limits::None)  and (inv!= 9 or ( inv == 9 and checkAlfanum(digitalpha) == true)  ) )
-                        {
-                            addElement(OperationList[i][0], digitalpha);
-                            pos = id;
-                        }
+                        addElement(OperationList[i][0], digitalpha);
+                        pos = id;
+
                         break;
                     }
                 }
+
+            }
             }
 
         }
