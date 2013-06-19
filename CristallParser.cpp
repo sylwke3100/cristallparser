@@ -1,8 +1,5 @@
 #include "CristallParser.h"
 
-
-
-
 int CristallParser::searchInvoke(string& Val)
 {
     if(Val.substr(0,7)=="#number") return 7;
@@ -72,7 +69,6 @@ void  CristallParser::parseData(string RawData)
                 digitalpha.clear();
                 int inv = searchInvoke(OperationList[i][1]);
                 int Limit = ConvertStringtoInt(OperationList[i][1].substr(inv));
-                int lid = 0;
                 for (int id = pos; id<=RawData.length(); id++)
                 {
                     int courrentinv =  detectInvoke(RawData[id]);
@@ -91,19 +87,17 @@ void  CristallParser::parseData(string RawData)
                             digitalpha+=RawData[id];
                         break;
                     }
-
-                if(courrentinv == 0 and digitalpha.length()>0 and (digitalpha.length()==Limit or Limit==(int)Limits::None) )
-                {
-                    if( (inv == 9 and checkAlfanum(digitalpha)==true ) or ( inv!=9 and checkAlfanum(digitalpha)==false) )
+                    if(courrentinv == 0 and digitalpha.length()>0 and (digitalpha.length()==Limit or Limit==(int)Limits::None) )
                     {
-                        addElement(OperationList[i][0], digitalpha);
-                        pos = id;
-
-                        break;
+                        if( (inv == 9 and checkAlfanum(digitalpha)==true ) or ( inv!=9 and checkAlfanum(digitalpha)==false) )
+                        {
+                            addElement(OperationList[i][0], digitalpha);
+                            pos = id;
+                            break;
+                        }
                     }
-                }
 
-            }
+                }
             }
 
         }
