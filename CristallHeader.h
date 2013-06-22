@@ -9,7 +9,7 @@ enum class Rules
 {
     Numbers			= 0x1,
     Letters			= 0x2,
-    FloatNumbers    = 0x3,
+    FloatNumbers    = 0x4,
     AlphaNumeric	= Rules::Numbers | Rules::Letters
 };
 
