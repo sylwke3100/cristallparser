@@ -55,6 +55,9 @@ void CristallGrammar::addRule(string const& YourName, Rules Rule, int Limit)
     case Rules::AlphaNumeric:
         query = "#alpnumer"+temp->ConvertInttoString(Limit);
         break;
+    case Rules::FloatNumbers:
+        query = "#floatnumber"+temp->ConvertInttoString(Limit);
+        break;
     }
     if(!YourName.empty() && !query.empty())
         addGrammar(YourName, query);
