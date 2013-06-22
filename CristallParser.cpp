@@ -41,36 +41,35 @@ void  CristallParser::parseData(string RawData)
     string digitalpha;
     for (int pos = 0; pos<RawData.length(); pos++)
     {
-
-        for (int i =0; i<OperationList.size(); i++)
+        for (auto  element = OperationList.begin() ;element!= OperationList.end(); ++element)
         {
-            if (OperationList[i].size()==2 and RawData.substr(pos,OperationList[i][1].length())==OperationList[i][1])
+            if (element->second.size()==2 and RawData.substr(pos,element->second[1].length())==element->second[1])
             {
-                addElement(OperationList[i][0],OperationList[i][1]);
-                pos+=OperationList[i][1].length();
+                addElement(element->second[0],element->second[1]);
+                pos+=element->second[1].length();
             }
-            else if (OperationList[i].size()==3 and RawData.substr(pos,OperationList[i][1].length())==OperationList[i][1])
+            else if (element->second.size()==3 and RawData.substr(pos,element->second[1].length())==element->second[1])
             {
-                int po =(int) RawData.find(OperationList[i][2],pos+OperationList[i][1].length()+1);
-                if (po >pos+OperationList[i][1].length())
+                int po =(int) RawData.find(element->second[2],pos+element->second[1].length()+1);
+                if (po >pos+element->second[1].length())
                 {
-                    if (RunRule[i]==RunRuleInside::No)
-                        addElement(OperationList[i][0],RawData.substr(pos+OperationList[i][1].length(),po-(pos+OperationList[i][1].length())));
-                    if (RunRule[i]==RunRuleInside::Yes)
+                    if (RunRule[element->first]==RunRuleInside::No)
+                        addElement(element->second[0],RawData.substr(pos+element->second[1].length(),po-(pos+element->second[1].length())));
+                    if (RunRule[element->first]==RunRuleInside::Yes)
                     {
-                        addElement(OperationList[i][0],"open ->");
-                        string RawValue = RawData.substr(pos+OperationList[i][1].length(),po-(pos+OperationList[i][1].length()));
+                        addElement(element->second[0],"open ->");
+                        string RawValue = RawData.substr(pos+element->second[1].length(),po-(pos+element->second[1].length()));
                         parseData(RawValue);
-                        addElement(OperationList[i][0],"close ->");
+                        addElement(element->second[0],"close ->");
                     }
-                    pos = po+OperationList[i][2].length()-1;
+                    pos = po+element->second[2].length()-1;
                 }
             }
-            else if (searchInvoke(OperationList[i][1])!=0 and  detectInvoke(RawData[pos])!=0)
+            else if (searchInvoke(element->second[1])!=0 and  detectInvoke(RawData[pos])!=0)
             {
                 digitalpha.clear();
-                int inv = searchInvoke(OperationList[i][1]);
-                int Limit = ConvertStringtoInt(OperationList[i][1].substr(inv));
+                int inv = searchInvoke(element->second[1]);
+                int Limit = ConvertStringtoInt(element->second[1].substr(inv));
                 for (int id = pos; id<=RawData.length(); id++)
                 {
                     int courrentinv =  detectInvoke(RawData[id]);
@@ -95,7 +94,7 @@ void  CristallParser::parseData(string RawData)
                     {
                         if( (inv == 9 and checkAlfanum(digitalpha)==true ) or ( inv!=9 and checkAlfanum(digitalpha)==false) )
                         {
-                            addElement(OperationList[i][0], digitalpha);
+                            addElement(element->second[0], digitalpha);
                             pos = id;
                             break;
                         }
