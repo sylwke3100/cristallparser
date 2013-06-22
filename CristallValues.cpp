@@ -48,11 +48,11 @@ void CristallValues::addElement(string Label, string Value)
 CristallValues CristallValues::search(string What, DataType Data, SearchType How)
 {
     CristallValues D;
-    for(int i =0; i<Summary.size(); i++)
+    for(auto i = Summary.begin(); i!=Summary.end();++i)
     {
-        if( (this->getElement(i,Data) == What and How ==SearchType::FullText) or ((int)this->getElement(i, Data).find(What)>-1 and  How == SearchType::Inside))
+        if( (this->getElement(i->first,Data) == What and How ==SearchType::FullText) or ((int)this->getElement(i->first, Data).find(What)>-1 and  How == SearchType::Inside))
         {
-            D.addElement(this->getElement(i,DataType::Label), this->getElement(i,DataType::Value));
+            D.addElement(this->getElement(i->first,DataType::Label), this->getElement(i->first,DataType::Value));
         }
     }
     return D;
