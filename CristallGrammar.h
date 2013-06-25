@@ -9,6 +9,7 @@
 #include "CristallValues.h"
 #include "CristallGroup.h"
 using namespace std;
+using namespace Cristall;
 
 using namespace Cristall;
 class CristallGrammar: public CristallGroup

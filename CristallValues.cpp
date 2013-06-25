@@ -57,3 +57,7 @@ CristallValues CristallValues::search(string What, DataType Data, SearchType How
     }
     return D;
 }
+void CristallValues::clear()
+{
+Summary.erase(Summary.begin(),Summary.end());
+}

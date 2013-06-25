@@ -21,6 +21,7 @@ public:
     void loadData(const map<int, map<DataType, string> > & Data);
     CristallValues search(string What, DataType Data, SearchType How);
     void addElement(string Label, string Value);
+    void clear();
 protected:
     map < int, map < DataType, string > > Summary;
 private:

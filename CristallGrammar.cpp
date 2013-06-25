@@ -1,7 +1,6 @@
 #include "CristallGrammar.h"
 
-using namespace std;
-using namespace Cristall;
+
 
 CristallGrammar::CristallGrammar() : OperationCount {0}
 {
