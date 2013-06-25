@@ -43,12 +43,12 @@ void  CristallParser::parseData(string RawData)
     {
         for (auto  element = OperationList.begin() ;element!= OperationList.end(); ++element)
         {
-            if (element->second.size()==2 and RawData.substr(pos,element->second[1].length())==element->second[1])
+            if (element->second.size()==2 && RawData.substr(pos,element->second[1].length())==element->second[1])
             {
                 addElement(element->second[0],element->second[1]);
                 pos+=element->second[1].length();
             }
-            else if (element->second.size()==3 and RawData.substr(pos,element->second[1].length())==element->second[1])
+            else if (element->second.size()==3 && RawData.substr(pos,element->second[1].length())==element->second[1])
             {
                 int po =(int) RawData.find(element->second[2],pos+element->second[1].length()+1);
                 if (po >pos+element->second[1].length())
@@ -65,7 +65,7 @@ void  CristallParser::parseData(string RawData)
                     pos = po+element->second[2].length()-1;
                 }
             }
-            else if (searchInvoke(element->second[1])!=0 and  detectInvoke(RawData[pos])!=0)
+            else if (searchInvoke(element->second[1])!=0 &&  detectInvoke(RawData[pos])!=0)
             {
                 digitalpha.clear();
                 int inv = searchInvoke(element->second[1]);
@@ -86,13 +86,13 @@ void  CristallParser::parseData(string RawData)
                             digitalpha+=RawData[id];
                         break;
                     case 9:
-                        if(courrentinv==7 or courrentinv==6)
+                        if(courrentinv==7 || courrentinv==6)
                             digitalpha+=RawData[id];
                         break;
                     }
-                    if(courrentinv == 0 and digitalpha.length()>0 and (digitalpha.length()==Limit or Limit==(int)Limits::None) )
+                    if(courrentinv == 0 && digitalpha.length()>0 && (digitalpha.length()==Limit || Limit==(int)Limits::None) )
                     {
-                        if( (inv == 9 and checkAlfanum(digitalpha)==true ) or ( inv!=9 and checkAlfanum(digitalpha)==false) )
+                        if( (inv == 9 && checkAlfanum(digitalpha)==true ) || ( inv!=9 && checkAlfanum(digitalpha)==false) )
                         {
                             addElement(element->second[0], digitalpha);
                             pos = id;

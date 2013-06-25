@@ -50,7 +50,7 @@ CristallValues CristallValues::search(string What, DataType Data, SearchType How
     CristallValues D;
     for(auto i = Summary.begin(); i!=Summary.end();++i)
     {
-        if( (this->getElement(i->first,Data) == What and How ==SearchType::FullText) or ((int)this->getElement(i->first, Data).find(What)>-1 and  How == SearchType::Inside))
+        if( (this->getElement(i->first,Data) == What && How ==SearchType::FullText) || ((int)this->getElement(i->first, Data).find(What)>-1 &&  How == SearchType::Inside))
         {
             D.addElement(this->getElement(i->first,DataType::Label), this->getElement(i->first,DataType::Value));
         }
