@@ -15,7 +15,7 @@ public:
 protected:
     vector <string> GroupList;
 private:
-    int isGroup(string GroupName);
+    bool isGroup(string GroupName);
 };
 
 #endif // CRISTALLGROUP_H

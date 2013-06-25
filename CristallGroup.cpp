@@ -15,9 +15,8 @@ string CristallGroup::getGroup(int GroupID)
         return "[empty]";
 }
 
-int CristallGroup::isGroup(string GroupName)
+bool CristallGroup::isGroup(string GroupName)
 {
-    int Is = false;
     vector<string>::iterator element;
     for(element = GroupList.begin(); element!=GroupList.end(); ++element)
     {
