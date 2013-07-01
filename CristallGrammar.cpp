@@ -12,6 +12,10 @@ void CristallGrammar::addGrammar(string Label, string Char)
     OperationList[OperationCount][1]= Char;
     OperationCount++;
     RunRule.push_back(RunRuleInside::No);
+    if  (Char.substr(0,1) != "#")
+        RuleTypes.push_back(RuleType::SingleRule);
+    else
+        RuleTypes.push_back(RuleType::SpecialRule);
 }
 void CristallGrammar::addGrammar(int GroupID, string Char)
 {
@@ -30,6 +34,7 @@ void CristallGrammar::addGrammarTo(string Label,string StartChar, string EndChar
         RunRule.push_back(Rule);
     else
         RunRule.push_back(RunRuleInside::Yes);
+    RuleTypes.push_back(RuleType::MultiRule);
 }
 
 void CristallGrammar::addGrammarTo(int GroupID ,string StartChar, string EndChar, RunRuleInside Rule)

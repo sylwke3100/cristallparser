@@ -43,12 +43,12 @@ void  CristallParser::parseData(string RawData)
     {
         for (auto  element = OperationList.begin() ;element!= OperationList.end(); ++element)
         {
-            if (element->second.size()==2 && RawData.substr(pos,element->second[1].length())==element->second[1])
+            if (RuleTypes[element->first] == RuleType::SingleRule && RawData.substr(pos,element->second[1].length())==element->second[1])
             {
                 addElement(element->second[0],element->second[1]);
                 pos+=element->second[1].length();
             }
-            else if (element->second.size()==3 && RawData.substr(pos,element->second[1].length())==element->second[1])
+            else if (RuleTypes[element->first] == RuleType::MultiRule && RawData.substr(pos,element->second[1].length())==element->second[1])
             {
                 int po =(int) RawData.find(element->second[2],pos+element->second[1].length()+1);
                 if (po >pos+element->second[1].length())
@@ -65,7 +65,7 @@ void  CristallParser::parseData(string RawData)
                     pos = po+element->second[2].length()-1;
                 }
             }
-            else if (searchInvoke(element->second[1])!=0 &&  detectInvoke(RawData[pos])!=0)
+            else if (RuleTypes[element->first] == RuleType::SpecialRule &&  detectInvoke(RawData[pos])!=0)
             {
                 digitalpha.clear();
                 int inv = searchInvoke(element->second[1]);
