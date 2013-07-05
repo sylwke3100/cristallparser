@@ -19,6 +19,7 @@ private:
     int searchInvoke(string& Val);
     int detectInvoke(char& Val);
     bool checkAlfanum(const string &str);
+    bool checkFloatnum(const string &str);
 public:
     void setData(string Data);
     CristallValues run();

@@ -22,10 +22,11 @@ public:
     void addRule(string const& YourName, Cristall::Rules Rule, int Limit);
 
 protected:
-    enum class RuleType{
-    SingleRule = 0,
-    MultiRule =  1,
-    SpecialRule = 2
+    enum class RuleType
+    {
+        SingleRule = 0,
+        MultiRule =  1,
+        SpecialRule = 2
     };
     int OperationCount;
     map <int, map<int, string> > OperationList;

@@ -10,6 +10,7 @@ int CristallParser::searchInvoke(string& Val)
 
 int CristallParser::detectInvoke(char& Val)
 {
+
     if(Val == '-')
         return 4;
     if(isdigit(Val))
@@ -31,6 +32,17 @@ bool CristallParser::checkAlfanum(string const& str)
     return numerical && alpha;
 }
 
+bool CristallParser::checkFloatnum(const string& str)
+{
+    bool coma {false};
+    for(auto const c : str)
+    {
+        if('.' == c)
+            return true;
+    }
+    return false;
+}
+
 void CristallParser::setData(string Data)
 {
     RawData = Data;
@@ -41,7 +53,7 @@ void  CristallParser::parseData(string RawData)
     string digitalpha;
     for (int pos = 0; pos<RawData.length(); pos++)
     {
-        for (auto  element = OperationList.begin() ;element!= OperationList.end(); ++element)
+        for (auto  element = OperationList.begin() ; element!= OperationList.end(); ++element)
         {
             if (RuleTypes[element->first] == RuleType::SingleRule && RawData.substr(pos,element->second[1].length())==element->second[1])
             {

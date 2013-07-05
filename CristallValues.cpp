@@ -48,7 +48,7 @@ void CristallValues::addElement(string Label, string Value)
 CristallValues CristallValues::search(string What, DataType Data, SearchType How)
 {
     CristallValues D;
-    for(auto i = Summary.begin(); i!=Summary.end();++i)
+    for(auto i = Summary.begin(); i!=Summary.end(); ++i)
     {
         if( (this->getElement(i->first,Data) == What && How ==SearchType::FullText) || ((int)this->getElement(i->first, Data).find(What)>-1 &&  How == SearchType::Inside))
         {
@@ -59,5 +59,5 @@ CristallValues CristallValues::search(string What, DataType Data, SearchType How
 }
 void CristallValues::clear()
 {
-Summary.erase(Summary.begin(),Summary.end());
+    Summary.erase(Summary.begin(),Summary.end());
 }
