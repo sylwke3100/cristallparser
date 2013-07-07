@@ -105,14 +105,18 @@ void  CristallParser::parseData(string RawData)
                             digitalpha+= RawData[id];
                             break;
                     default:
+                    cout<<digitalpha<<endl;
                         if(digitalpha.length()>0 && (digitalpha.length()==Limit || Limit==(int)Limits::None) )
                         {
-                            if( (inv == 9 && checkAlfanum(digitalpha)==true ) || ((inv !=12 && inv!=9 && checkAlfanum(digitalpha)==false && checkFloatnum(digitalpha)==false) || (inv == 12 && checkFloatnum(digitalpha)==true) ))
+                            if( (inv == 9 && checkAlfanum(digitalpha)==true ) || (( (inv !=12 && inv!=9 ) && checkAlfanum(digitalpha)==false && checkFloatnum(digitalpha)==false) || (inv == 12 && checkFloatnum(digitalpha)==true) ))
                             {
                                 addElement(element->second[0], digitalpha);
                                 pos = id;
                                 id = RawData.length();
                             }
+                            else
+                                id = RawData.length();
+
                         }
                         break;
                         }
