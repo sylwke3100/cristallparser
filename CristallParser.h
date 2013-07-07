@@ -8,18 +8,15 @@
 #include "CristallHeader.h"
 #include "CristallGrammar.h"
 #include "CristallValues.h"
+#include "CristallDetectTools.h"
 using namespace std;
 using namespace Cristall;
 
-class CristallParser : public CristallGrammar, CristallValues
+class CristallParser : public CristallGrammar, CristallValues, CristallDetectTools
 {
 private:
     string RawData;
     void parseData(string RawData);
-    int searchInvoke(string& Val);
-    int detectInvoke(char& Val);
-    bool checkAlfanum(const string &str);
-    bool checkFloatnum(const string &str);
 public:
     void setData(string Data);
     CristallValues run();
