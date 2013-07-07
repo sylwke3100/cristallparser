@@ -36,9 +36,12 @@ bool CristallParser::checkAlfanum(string const& str)
 
 bool CristallParser::checkFloatnum(const string& str)
 {
+    bool digit {false};
     for(auto const c : str)
     {
-        if('.' == c)
+        if(isdigit(c) && digit == false)
+            digit = true;
+        if('.' == c && digit == true)
             return true;
     }
     return false;
@@ -105,10 +108,9 @@ void  CristallParser::parseData(string RawData)
                             digitalpha+= RawData[id];
                             break;
                     default:
-                    cout<<digitalpha<<endl;
                         if(digitalpha.length()>0 && (digitalpha.length()==Limit || Limit==(int)Limits::None) )
                         {
-                            if( (inv == 9 && checkAlfanum(digitalpha)==true ) || (( (inv !=12 && inv!=9 ) && checkAlfanum(digitalpha)==false && checkFloatnum(digitalpha)==false) || (inv == 12 && checkFloatnum(digitalpha)==true) ))
+                            if( (inv == 9 && checkAlfanum(digitalpha)==true ) || (( inv ==6  && checkAlfanum(digitalpha)==false && checkFloatnum(digitalpha)==false) || (inv == 12 && checkFloatnum(digitalpha)==true) ) || (inv ==7 && checkAlfanum(digitalpha)==false && (int)digitalpha.find('.')==-1))
                             {
                                 addElement(element->second[0], digitalpha);
                                 pos = id;
