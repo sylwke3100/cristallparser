@@ -6,12 +6,14 @@ set (libCristallParserSrc
 		CristallParser.cpp 
 		CristallValues.cpp
 		CristallGroup.cpp
+		CristallDetectTools.cpp
 	)
 set (libCristallParserHeader
 		CristallGrammar.h 
 		CristallParser.h
 		CristallValues.h
 		CristallGroup.h
+		CristallDetectTools.h
 	)
 set (libCristallParserLib
 		libcristallparser.so
