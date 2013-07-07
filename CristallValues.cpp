@@ -34,6 +34,7 @@ string CristallValues::getElement(int Id, DataType Data)
         return Summary[Id][DataType::Value];
         break;
     }
+    return Summary[Id][DataType::Label];
 }
 void  CristallValues::loadData(const map < int, map < DataType, string > >& Data)
 {
