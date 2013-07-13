@@ -14,6 +14,7 @@ set (libCristallParserHeader
 		CristallValues.h
 		CristallGroup.h
 		CristallDetectTools.h
+		CristallGrammarModel.h
 	)
 set (libCristallParserLib
 		libcristallparser.so
