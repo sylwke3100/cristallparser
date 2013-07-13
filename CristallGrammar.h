@@ -15,7 +15,6 @@ using namespace Cristall;
 class CristallGrammar: public CristallGroup
 {
 public:
-    CristallGrammar();
     void addGrammar(string Label,string Char);
     void addGrammar(int GroupID,string Char);
     void addGrammarTo(string Label, string StartChar, string EndChar,RunRuleInside Rule);
@@ -23,7 +22,6 @@ public:
     void addRule(string const& YourName, Cristall::Rules Rule, int Limit);
 
 protected:
-    int OperationCount;
     vector <CristallGrammarModel> OperationList;
 private:
 };

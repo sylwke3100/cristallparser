@@ -2,9 +2,6 @@
 
 
 
-CristallGrammar::CristallGrammar() : OperationCount {0}
-{
-}
 
 void CristallGrammar::addGrammar(string Label, string Char)
 {
@@ -14,6 +11,7 @@ void CristallGrammar::addGrammar(string Label, string Char)
     OperationElement->RunRule = RunRuleInside::No;
     OperationElement->RuleTypes = RuleType::SingleRule;
     OperationList.push_back(*OperationElement);
+    delete OperationElement;
 }
 void CristallGrammar::addGrammar(int GroupID, string Char)
 {
@@ -31,6 +29,7 @@ void CristallGrammar::addGrammarTo(string Label,string StartChar, string EndChar
     OperationElement->RunRule = Rule;
     OperationElement->RuleTypes = RuleType::MultiRule;
     OperationList.push_back(*OperationElement);
+    delete OperationElement;
 }
 
 void CristallGrammar::addGrammarTo(int GroupID ,string StartChar, string EndChar, RunRuleInside Rule)
@@ -49,4 +48,5 @@ void CristallGrammar::addRule(string const& YourName, Rules Rule, int Limit)
     OperationElement->RunRule = RunRuleInside::No;
     OperationElement->RuleTypes = RuleType::SpecialRule;
     OperationList.push_back(*OperationElement);
+    delete OperationElement;
 }
