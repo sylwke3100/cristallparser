@@ -8,6 +8,7 @@
 #include "CristallHeader.h"
 #include "CristallValues.h"
 #include "CristallGroup.h"
+#include "CristallGrammarModel.h"
 using namespace std;
 
 using namespace Cristall;
@@ -22,16 +23,8 @@ public:
     void addRule(string const& YourName, Cristall::Rules Rule, int Limit);
 
 protected:
-    enum class RuleType
-    {
-        SingleRule = 0,
-        MultiRule =  1,
-        SpecialRule = 2
-    };
     int OperationCount;
-    map <int, map<int, string> > OperationList;
-    vector <RunRuleInside> RunRule;
-    vector <RuleType> RuleTypes;
+    vector <CristallGrammarModel> OperationList;
 private:
 };
 

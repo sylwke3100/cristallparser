@@ -5,13 +5,13 @@
 #include <iostream>
 #include <cctype>
 #include <map>
-
+#include "CristallHeader.h"
 using namespace std;
-
+using namespace Cristall;
 class CristallDetectTools
 {
 protected:
-    int searchInvoke(string& Val);
+    int searchInvoke(Rules Rule);
     int detectInvoke(char& Val);
     bool checkAlfanum(const string &str);
     bool checkFloatnum(const string &str);

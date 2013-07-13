@@ -34,6 +34,12 @@ enum class SearchType
     FullText = 0,
     Inside = 1
 };
+enum class RuleType
+    {
+        SingleRule = 0,
+        MultiRule =  1,
+        SpecialRule = 2
+    };
 }
 
 

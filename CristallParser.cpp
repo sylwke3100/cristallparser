@@ -11,35 +11,35 @@ void  CristallParser::parseData(string RawData)
     string digitalpha;
     for (int pos = 0; pos<RawData.length(); pos++)
     {
-        for (auto  element = OperationList.begin() ; element!= OperationList.end(); ++element)
+        for (auto  element : OperationList)
         {
-            if (RuleTypes[element->first] == RuleType::SingleRule && RawData.substr(pos,element->second[1].length())==element->second[1])
+            if (element.RuleTypes == RuleType::SingleRule && RawData.substr(pos,element.StartChar.length())==element.StartChar)
             {
-                addElement(element->second[0],element->second[1]);
-                pos+=element->second[1].length();
+                addElement(element.Label,element.StartChar);
+                pos+=element.Label.length();
             }
-            else if (RuleTypes[element->first] == RuleType::MultiRule && RawData.substr(pos,element->second[1].length())==element->second[1])
+            else if (element.RuleTypes == RuleType::MultiRule && RawData.substr(pos,element.StartChar.length())==element.StartChar)
             {
-                int po =(int) RawData.find(element->second[2],pos+element->second[1].length()+1);
-                if (po >pos+element->second[1].length())
+                int po =(int) RawData.find(element.EndChar, pos+element.StartChar.length()+1);
+                if (po >pos+element.StartChar.length())
                 {
-                    if (RunRule[element->first]==RunRuleInside::No)
-                        addElement(element->second[0],RawData.substr(pos+element->second[1].length(),po-(pos+element->second[1].length())));
-                    if (RunRule[element->first]==RunRuleInside::Yes)
+                    if (element.RunRule==RunRuleInside::No)
+                        addElement(element.Label,RawData.substr(pos+element.StartChar.length(),po-(pos+element.StartChar.length())));
+                    if (element.RunRule==RunRuleInside::Yes)
                     {
-                        addElement(element->second[0],"open ->");
-                        string RawValue = RawData.substr(pos+element->second[1].length(),po-(pos+element->second[1].length()));
+                        addElement(element.Label,"open ->");
+                        string RawValue = RawData.substr(pos+element.StartChar.length(),po-(pos+element.StartChar.length()));
                         parseData(RawValue);
-                        addElement(element->second[0],"close ->");
+                        addElement(element.Label,"close ->");
                     }
-                    pos = po+element->second[2].length()-1;
+                    pos = po+element.EndChar.length()-1;
                 }
             }
-            else if (RuleTypes[element->first] == RuleType::SpecialRule &&  detectInvoke(RawData[pos])!=0)
+            else if (element.RuleTypes == RuleType::SpecialRule &&  detectInvoke(RawData[pos])!=0)
             {
                 digitalpha.clear();
-                int inv = searchInvoke(element->second[1]);
-                int Limit = ConvertStringtoInt(element->second[1].substr(inv));
+                int inv = (int)searchInvoke(element.RuleGroup);
+                int Limit = element.Limit;
                 for (int id = pos; id<=RawData.length(); id++)
                 {
                     int currentinv =  detectInvoke(RawData[id]);
@@ -66,7 +66,7 @@ void  CristallParser::parseData(string RawData)
                         {
                             if( (inv == 9 && checkAlfanum(digitalpha)==true ) || (( inv ==6  && checkAlfanum(digitalpha)==false && checkFloatnum(digitalpha)==false) || (inv == 12 && checkFloatnum(digitalpha)==true) ) || (inv ==7 && checkAlfanum(digitalpha)==false && (int)digitalpha.find('.')==-1))
                             {
-                                addElement(element->second[0], digitalpha);
+                                addElement(element.Label, digitalpha);
                                 pos = id;
                                 id = RawData.length();
                             }

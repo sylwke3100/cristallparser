@@ -8,14 +8,12 @@ CristallGrammar::CristallGrammar() : OperationCount {0}
 
 void CristallGrammar::addGrammar(string Label, string Char)
 {
-    OperationList[OperationCount][0] = Label;
-    OperationList[OperationCount][1]= Char;
-    OperationCount++;
-    RunRule.push_back(RunRuleInside::No);
-    if  (Char.substr(0,1) != "#")
-        RuleTypes.push_back(RuleType::SingleRule);
-    else
-        RuleTypes.push_back(RuleType::SpecialRule);
+    CristallGrammarModel * OperationElement = new CristallGrammarModel;
+    OperationElement->Label = Label;
+    OperationElement->StartChar= Char;
+    OperationElement->RunRule = RunRuleInside::No;
+    OperationElement->RuleTypes = RuleType::SingleRule;
+    OperationList.push_back(*OperationElement);
 }
 void CristallGrammar::addGrammar(int GroupID, string Char)
 {
@@ -26,15 +24,13 @@ void CristallGrammar::addGrammar(int GroupID, string Char)
 
 void CristallGrammar::addGrammarTo(string Label,string StartChar, string EndChar, RunRuleInside Rule)
 {
-    OperationList[OperationCount][0] = Label;
-    OperationList[OperationCount][1]= StartChar;
-    OperationList[OperationCount][2]= EndChar;
-    OperationCount++;
-    if( Rule == RunRuleInside::Yes || Rule == RunRuleInside::No)
-        RunRule.push_back(Rule);
-    else
-        RunRule.push_back(RunRuleInside::Yes);
-    RuleTypes.push_back(RuleType::MultiRule);
+    CristallGrammarModel * OperationElement = new CristallGrammarModel;
+    OperationElement->Label = Label;
+    OperationElement->StartChar= StartChar;
+    OperationElement->EndChar= EndChar;
+    OperationElement->RunRule = Rule;
+    OperationElement->RuleTypes = RuleType::MultiRule;
+    OperationList.push_back(*OperationElement);
 }
 
 void CristallGrammar::addGrammarTo(int GroupID ,string StartChar, string EndChar, RunRuleInside Rule)
@@ -46,24 +42,11 @@ void CristallGrammar::addGrammarTo(int GroupID ,string StartChar, string EndChar
 
 void CristallGrammar::addRule(string const& YourName, Rules Rule, int Limit)
 {
-    CristallValues * temp = new CristallValues;
-    string query;
-    switch(Rule)
-    {
-    case Rules::Numbers:
-        query = "#number"+temp->ConvertInttoString(Limit);
-        break;
-    case Rules::Letters:
-        query = "#alpha"+temp->ConvertInttoString(Limit);
-        break;
-    case Rules::AlphaNumeric:
-        query = "#alpnumer"+temp->ConvertInttoString(Limit);
-        break;
-    case Rules::FloatNumbers:
-        query = "#floatnumber"+temp->ConvertInttoString(Limit);
-        break;
-    }
-    if(!YourName.empty() && !query.empty())
-        addGrammar(YourName, query);
-    delete temp;
+    CristallGrammarModel * OperationElement = new CristallGrammarModel;
+    OperationElement->Label = YourName;
+    OperationElement->Limit = Limit;
+    OperationElement->RuleGroup = Rule;
+    OperationElement->RunRule = RunRuleInside::No;
+    OperationElement->RuleTypes = RuleType::SpecialRule;
+    OperationList.push_back(*OperationElement);
 }
