@@ -18,6 +18,7 @@ private:
     string RawData;
     void parseData(string RawData);
 public:
+    void setOptions(Options Option);
     void setData(string Data);
     CristallValues run();
 

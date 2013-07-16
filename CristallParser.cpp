@@ -1,6 +1,17 @@
 #include "CristallParser.h"
 
+void CristallParser::setOptions(Options Option)
+{
 
+    switch(Option)
+    {
+    case Options::Option_ComaFloatSeparated:
+        OPTION_SEPARATEDFLOAT = ',';
+    case Options::Option_DotFloatSeparated:
+        OPTION_SEPARATEDFLOAT = '.';
+    }
+
+}
 void CristallParser::setData(string Data)
 {
     RawData = Data;

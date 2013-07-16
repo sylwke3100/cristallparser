@@ -11,7 +11,7 @@ int CristallDetectTools::searchInvoke(Rules Rule)
 
 int CristallDetectTools::detectInvoke(char& Val)
 {
-    if(Val == '.')
+    if(Val == OPTION_SEPARATEDFLOAT)
         return 3;
      if (Val == '-')
         return 4;

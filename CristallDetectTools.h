@@ -15,6 +15,7 @@ protected:
     int detectInvoke(char& Val);
     bool checkAlfanum(const string &str);
     bool checkFloatnum(const string &str);
+    char OPTION_SEPARATEDFLOAT = '.';
 };
 
 #endif // CRISTALLDETECTTOOLS_H

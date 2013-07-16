@@ -40,7 +40,10 @@ enum class RuleType
         MultiRule =  1,
         SpecialRule = 2
     };
+enum class Options
+{
+    Option_ComaFloatSeparated = 0,
+    Option_DotFloatSeparated = 1
+};
 }
-
-
 #endif
