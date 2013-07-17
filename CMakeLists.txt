@@ -2,19 +2,20 @@ cmake_minimum_required (VERSION 2.6)
 project (libcristallparser)
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -O3" )
 set (libCristallParserSrc
-		CristallGrammar.cpp 
-		CristallParser.cpp 
+		CristallGrammar.cpp
+		CristallParser.cpp
 		CristallValues.cpp
 		CristallGroup.cpp
 		CristallDetectTools.cpp
 	)
 set (libCristallParserHeader
-		CristallGrammar.h 
+		CristallGrammar.h
 		CristallParser.h
 		CristallValues.h
 		CristallGroup.h
 		CristallDetectTools.h
 		CristallGrammarModel.h
+		CristallValuesModel.h
 	)
 set (libCristallParserLib
 		libcristallparser.so
