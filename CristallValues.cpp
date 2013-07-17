@@ -28,33 +28,37 @@ string CristallValues::getElement(int Id, DataType Data)
     switch(Data)
     {
     case DataType::Label:
-        return Summary[Id][DataType::Label];
+        return Summary[Id].Label;
         break;
     case DataType::Value:
-        return Summary[Id][DataType::Value];
+        return Summary[Id].Value;
         break;
     }
-    return Summary[Id][DataType::Label];
+    return Summary[Id].Label;
 }
-void  CristallValues::loadData(const map < int, map < DataType, string > >& Data)
+void  CristallValues::loadData(const vector <CristallValuesModel> & Data)
 {
-    Summary = Data;
+   Summary = Data;
 }
 void CristallValues::addElement(string Label, string Value)
 {
-    int c = Summary.size();
-    Summary[c][DataType::Label] =Label;
-    Summary[c][DataType::Value] =Value;
+    CristallValuesModel * Model = new CristallValuesModel;
+    Model->Label =Label;
+    Model->Value =Value;
+    Summary.push_back(*Model);
+    delete Model;
 }
 CristallValues CristallValues::search(string What, DataType Data, SearchType How)
 {
     CristallValues D;
-    for(auto i = Summary.begin(); i!=Summary.end(); ++i)
+    int Index = 0;
+    for(auto i : Summary)
     {
-        if( (this->getElement(i->first,Data) == What && How ==SearchType::FullText) || ((int)this->getElement(i->first, Data).find(What)>-1 &&  How == SearchType::Inside))
+        if( (this->getElement(Index,Data) == What && How ==SearchType::FullText) || ((int)this->getElement(Index, Data).find(What)>-1 &&  How == SearchType::Inside))
         {
-            D.addElement(this->getElement(i->first,DataType::Label), this->getElement(i->first,DataType::Value));
+            D.addElement(this->getElement(Index,DataType::Label), this->getElement(Index,DataType::Value));
         }
+        Index++;
     }
     return D;
 }

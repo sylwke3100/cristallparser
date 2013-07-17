@@ -5,7 +5,9 @@
 #include <cctype>
 #include <map>
 #include <sstream>
+#include <vector>
 #include "CristallHeader.h"
+#include "CristallValuesModel.h"
 
 using namespace std;
 using namespace Cristall;
@@ -18,12 +20,11 @@ public:
     int size();
     string ConvertInttoString(int Data);
     string getElement(int Id, DataType Data);
-    void loadData(const map<int, map<DataType, string> > & Data);
+    void loadData(const vector <CristallValuesModel> & Data);
     CristallValues search(string What, DataType Data, SearchType How);
     void addElement(string Label, string Value);
     void clear();
-protected:
-    map < int, map < DataType, string > > Summary;
+    vector < CristallValuesModel > Summary;
 private:
 };
 
