@@ -38,7 +38,7 @@ string CristallValues::getElement(int Id, DataType Data)
 }
 void  CristallValues::loadData(const vector <CristallValuesModel> & Data)
 {
-   Summary = Data;
+    Summary = Data;
 }
 void CristallValues::addElement(string Label, string Value)
 {

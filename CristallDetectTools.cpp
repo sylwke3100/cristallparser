@@ -9,17 +9,17 @@ int CristallDetectTools::searchInvoke(Rules Rule)
     return 0;
 }
 
-int CristallDetectTools::detectInvoke(char& Val)
+CristallDetectTools::Types CristallDetectTools::detectInvoke(char& Val)
 {
     if(Val == OPTION_SEPARATEDFLOAT)
-        return 3;
-     if (Val == '-')
-        return 4;
+        return Types::Coma;
+    if (Val == '-')
+        return Types::Minus;
     if(isdigit(Val))
-        return 7;
+        return Types::Digit;
     if(isalpha(Val))
-        return 6;
-    return 0;
+        return Types::Alpha;
+    return Types::None;
 }
 
 bool CristallDetectTools::checkAlfanum(string const& str)

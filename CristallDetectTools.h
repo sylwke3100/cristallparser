@@ -11,11 +11,20 @@ using namespace Cristall;
 class CristallDetectTools
 {
 protected:
+    enum class Types
+    {
+        Coma = 3,
+        Minus = 4,
+        Alpha = 6,
+        Digit = 7,
+        None = 0
+    };
     int searchInvoke(Rules Rule);
-    int detectInvoke(char& Val);
+    CristallDetectTools::Types detectInvoke(char& Val);
     bool checkAlfanum(const string &str);
     bool checkFloatnum(const string &str);
     char OPTION_SEPARATEDFLOAT = '.';
+
 };
 
 #endif // CRISTALLDETECTTOOLS_H

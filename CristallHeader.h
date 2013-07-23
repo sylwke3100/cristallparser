@@ -35,11 +35,11 @@ enum class SearchType
     Inside = 1
 };
 enum class RuleType
-    {
-        SingleRule = 0,
-        MultiRule =  1,
-        SpecialRule = 2
-    };
+{
+    SingleRule = 0,
+    MultiRule =  1,
+    SpecialRule = 2
+};
 enum class Options
 {
     Option_ComaFloatSeparated = 0,
