@@ -58,6 +58,10 @@ CristallValues CristallValues::search(string What, DataType Data, SearchType How
         {
             D.addElement(this->getElement(Index,DataType::Label), this->getElement(Index,DataType::Value));
         }
+        else if ((this->getElement(Index,Data) == What || (int)this->getElement(Index, Data).find(What)>-1 ) && How == SearchType::Any )
+        {
+             D.addElement(this->getElement(Index,DataType::Label), this->getElement(Index,DataType::Value));
+        }
         Index++;
     }
     return D;

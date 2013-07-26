@@ -65,7 +65,7 @@ void  CristallParser::parseData(string RawData)
                         break;
                     case Types::Coma:
                         if(( inv == 12  || inv == 7 ) && digitalpha.length()>=1)
-                            digitalpha+= ".";
+                            digitalpha+= OPTION_SEPARATEDFLOAT;
                         break;
                     case Types::Minus:
                         if(( inv == 12  || inv == 7 )&& digitalpha.length()==0)

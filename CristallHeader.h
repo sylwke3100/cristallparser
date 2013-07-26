@@ -32,7 +32,8 @@ enum class RunRuleInside
 enum class SearchType
 {
     FullText = 0,
-    Inside = 1
+    Inside = 1,
+    Any = 2
 };
 enum class RuleType
 {
