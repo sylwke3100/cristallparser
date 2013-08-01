@@ -13,6 +13,7 @@ set (libCristallParserHeader
 		CristallParser.h
 		CristallValues.h
 		CristallGroup.h
+		CristallHeader.h
 		CristallDetectTools.h
 		CristallGrammarModel.h
 		CristallValuesModel.h
