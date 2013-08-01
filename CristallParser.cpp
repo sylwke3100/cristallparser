@@ -26,7 +26,7 @@ void  CristallParser::parseData(string RawData)
         {
             if (element.RuleTypes == RuleType::SingleRule && RawData.substr(pos,element.StartChar.length())==element.StartChar)
             {
-                addElement(element.Label,element.StartChar);
+                addElement(element.Label,element.StartChar, ModelReciv::Normal);
                 pos+=element.Label.length();
             }
             else if (element.RuleTypes == RuleType::MultiRule && RawData.substr(pos,element.StartChar.length())==element.StartChar)
@@ -35,13 +35,13 @@ void  CristallParser::parseData(string RawData)
                 if (po >pos+element.StartChar.length())
                 {
                     if (element.RunRule==RunRuleInside::No)
-                        addElement(element.Label,RawData.substr(pos+element.StartChar.length(),po-(pos+element.StartChar.length())));
+                        addElement(element.Label,RawData.substr(pos+element.StartChar.length(),po-(pos+element.StartChar.length())), ModelReciv::Open);
                     if (element.RunRule==RunRuleInside::Yes)
                     {
-                        addElement(element.Label,"open ->");
+                        addElement(element.Label,"", ModelReciv::Open);
                         string RawValue = RawData.substr(pos+element.StartChar.length(),po-(pos+element.StartChar.length()));
                         parseData(RawValue);
-                        addElement(element.Label,"close ->");
+                        addElement(element.Label, "", ModelReciv::Close);
                     }
                     pos = po+element.EndChar.length()-1;
                 }
@@ -76,7 +76,7 @@ void  CristallParser::parseData(string RawData)
                         {
                             if( (inv == 9 && checkAlfanum(digitalpha)==true ) || (( inv ==6  && checkAlfanum(digitalpha)==false && checkFloatnum(digitalpha)==false) || (inv == 12 && checkFloatnum(digitalpha)==true) ) || (inv ==7 && checkAlfanum(digitalpha)==false && (int)digitalpha.find('.')==-1))
                             {
-                                addElement(element.Label, digitalpha);
+                                addElement(element.Label, digitalpha, ModelReciv::Normal);
                                 pos = id;
                                 id = RawData.length();
                             }

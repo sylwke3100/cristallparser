@@ -22,7 +22,7 @@ public:
     string getElement(int Id, DataType Data);
     void loadData(const vector <CristallValuesModel> & Data);
     CristallValues search(string What, DataType Data, SearchType How);
-    void addElement(string Label, string Value);
+    void addElement(string Label, string Value, ModelReciv Reciv);
     void clear();
     vector < CristallValuesModel > Summary;
 private:

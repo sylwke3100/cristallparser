@@ -40,11 +40,12 @@ void  CristallValues::loadData(const vector <CristallValuesModel> & Data)
 {
     Summary = Data;
 }
-void CristallValues::addElement(string Label, string Value)
+void CristallValues::addElement(string Label, string Value, ModelReciv Reciv)
 {
     CristallValuesModel * Model = new CristallValuesModel;
     Model->Label =Label;
     Model->Value =Value;
+    Model->Type = Reciv;
     Summary.push_back(*Model);
     delete Model;
 }
@@ -56,11 +57,11 @@ CristallValues CristallValues::search(string What, DataType Data, SearchType How
     {
         if( (this->getElement(Index,Data) == What && How ==SearchType::FullText) || ((int)this->getElement(Index, Data).find(What)>-1 &&  How == SearchType::Inside))
         {
-            D.addElement(this->getElement(Index,DataType::Label), this->getElement(Index,DataType::Value));
+            D.addElement(this->getElement(Index,DataType::Label), this->getElement(Index,DataType::Value), ModelReciv::Normal);
         }
         else if ((this->getElement(Index,Data) == What || (int)this->getElement(Index, Data).find(What)>-1 ) && How == SearchType::Any )
         {
-             D.addElement(this->getElement(Index,DataType::Label), this->getElement(Index,DataType::Value));
+             D.addElement(this->getElement(Index,DataType::Label), this->getElement(Index,DataType::Value), ModelReciv::Normal);
         }
         Index++;
     }
