@@ -1,13 +1,6 @@
 #include "CristallDetectTools.h"
 
-int CristallDetectTools::searchInvoke(Rules Rule)
-{
-    if(Rule == Rules::Numbers) return 7;
-    if (Rule == Rules::Letters) return 6;
-    if (Rule == Rules::AlphaNumeric) return 9;
-    if (Rule == Rules::FloatNumbers) return 12;
-    return 0;
-}
+
 
 CristallDetectTools::Types CristallDetectTools::detectInvoke(char& Val)
 {

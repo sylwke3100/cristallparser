@@ -49,32 +49,32 @@ void  CristallParser::parseData(string RawData)
             else if (element.RuleTypes == RuleType::SpecialRule &&  detectInvoke(RawData[pos])!=Types::None)
             {
                 digitalpha.clear();
-                int inv = (int)searchInvoke(element.RuleGroup);
+                Rules inv = element.RuleGroup;
                 int Limit = element.Limit;
                 for (int id = pos; id<=RawData.length(); id++)
                 {
                     switch(detectInvoke(RawData[id]))
                     {
                     case Types::Alpha:
-                        if(inv == 6 || inv == 9)
+                        if(inv == Rules::Letters || inv == Rules::AlphaNumeric)
                             digitalpha+= RawData[id];
                         break;
                     case Types::Digit:
-                        if(inv == 7 || inv == 12)
+                        if(inv ==Rules::Numbers || inv ==Rules::FloatNumbers)
                             digitalpha+= RawData[id];
                         break;
                     case Types::Coma:
-                        if(( inv == 12  || inv == 7 ) && digitalpha.length()>=1)
+                        if(( inv == Rules::FloatNumbers  || inv == Rules::Numbers ) && digitalpha.length()>=1)
                             digitalpha+= OPTION_SEPARATEDFLOAT;
                         break;
                     case Types::Minus:
-                        if(( inv == 12  || inv == 7 )&& digitalpha.length()==0)
+                        if(( inv == Rules::FloatNumbers  || inv == Rules::Numbers )&& digitalpha.length()==0)
                             digitalpha+= RawData[id];
                         break;
                     case Types::None:
                         if(digitalpha.length()>0 && (digitalpha.length()==Limit || Limit==(int)Limits::None) )
                         {
-                            if( (inv == 9 && checkAlfanum(digitalpha)==true ) || (( inv ==6  && checkAlfanum(digitalpha)==false && checkFloatnum(digitalpha)==false) || (inv == 12 && checkFloatnum(digitalpha)==true) ) || (inv ==7 && checkAlfanum(digitalpha)==false && (int)digitalpha.find('.')==-1))
+                            if( (inv == Rules::AlphaNumeric && checkAlfanum(digitalpha)==true ) || (( inv ==Rules::Letters  && checkAlfanum(digitalpha)==false && checkFloatnum(digitalpha)==false) || (inv == Rules::FloatNumbers && checkFloatnum(digitalpha)==true) ) || (inv ==Rules::Numbers && checkAlfanum(digitalpha)==false && (int)digitalpha.find('.')==-1))
                             {
                                 addElement(element.Label, digitalpha, ModelReciv::Normal);
                                 pos = id;

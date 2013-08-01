@@ -19,7 +19,6 @@ protected:
         Digit = 7,
         None = 0
     };
-    int searchInvoke(Rules Rule);
     CristallDetectTools::Types detectInvoke(char& Val);
     bool checkAlfanum(const string &str);
     bool checkFloatnum(const string &str);
