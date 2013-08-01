@@ -4,9 +4,10 @@
 void CristallParser::addElement(string Label, string Value)
 {
     int c = Summary.size();
-    Summary[c]['Label'] =Label;
-    Summary[c]['Value'] =Value;
+    Summary[c][CristallValues::ValueType::Label] =Label;
+    Summary[c][CristallValues::ValueType::Value] =Value;
 }
+
 int CristallParser::searchInvoke(string& Val)
 {
     if(Val.substr(0,7)=="#number") return 7;
@@ -14,6 +15,7 @@ int CristallParser::searchInvoke(string& Val)
     if (Val.substr(0,9)=="#alpnumer") return 9;
     return 0;
 }
+
 int CristallParser::detectInvoke(char& Val)
 {
     if(isdigit(Val))
@@ -22,22 +24,24 @@ int CristallParser::detectInvoke(char& Val)
         return 6;
     return 0;
 }
-int CristallParser::checkAlfanum(string& Value)
+
+bool CristallParser::checkAlfanum(string const& str)
 {
-    int alpha = 0;
-    int num = 0;
-    for(int i =0; i<Value.length(); i++)
+    bool alpha {false};
+    bool numerical {false};
+    for(auto const c : str)
     {
-        if (isalpha(Value[i])) alpha++;
-        else if (isdigit(Value[i])) num++;
+        if(!alpha && isalpha(c)) alpha = true;
+        else if(!numerical && isdigit(c)) numerical = true;
     }
-    if(alpha>0 and num>0) return 1;
-    return 0;
+    return numerical && alpha;
 }
+
 void CristallParser::setData(string Data)
 {
     RawData = Data;
 }
+
 void  CristallParser::parseData(string RawData)
 {
     string digitalpha;
@@ -74,7 +78,8 @@ void  CristallParser::parseData(string RawData)
                 int Limit = Vals.ConvertStringtoInt(OperationList[i][1].substr(inv));
                 for (int id = pos; id<=RawData.length(); id++)
                 {
-                    if( (inv==9 and detectInvoke(RawData[id])== 6 or detectInvoke(RawData[id])==7 ) or detectInvoke(RawData[id])==inv and id <RawData.length())
+                    if((inv == 9 and (detectInvoke(RawData[id])== 6 or detectInvoke(RawData[id]) == 7)) or ( detectInvoke(RawData[id])==inv and id <RawData.length())
+)
                     {
                         digitalpha+=RawData[id];
                     }
@@ -82,8 +87,8 @@ void  CristallParser::parseData(string RawData)
                     {
                         if ( digitalpha.length()>0 and ( digitalpha.length() == Limit or Limit == CristallNoLimit)  and (inv!= 9 or ( inv == 9 and checkAlfanum(digitalpha) == true)  ) )
                         {
-                                addElement(OperationList[i][0], digitalpha);
-                                pos = id;
+                            addElement(OperationList[i][0], digitalpha);
+                            pos = id;
                         }
                         break;
                     }
@@ -93,8 +98,10 @@ void  CristallParser::parseData(string RawData)
         }
     }
 }
-map < int, map < const char, string > > CristallParser::run()
+
+CristallValues CristallParser::run()
 {
     parseData(this->RawData);
-    return Summary;
+    Vals.loadData(Summary);
+    return Vals;
 }
