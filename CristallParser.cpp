@@ -82,7 +82,6 @@ void  CristallParser::parseData(string RawData)
                             }
                             else
                                 id = RawData.length();
-
                         }
                         break;
                     }

@@ -41,7 +41,7 @@ bool CristallDetectTools::checkFloatnum(const string& str)
     {
         if(isdigit(c) && digit == false)
             digit = true;
-        if('.' == c && digit == true)
+        if(OPTION_SEPARATEDFLOAT == c && digit == true)
             return true;
     }
     return false;
