@@ -2,13 +2,14 @@
 
 void CristallParser::setOptions(Options Option)
 {
-
-    switch(Option)
+    switch (Option)
     {
     case Options::Option_ComaFloatSeparated:
         OPTION_SEPARATEDFLOAT = ',';
+		break;
     case Options::Option_DotFloatSeparated:
         OPTION_SEPARATEDFLOAT = '.';
+		break;
     }
 
 }
