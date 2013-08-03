@@ -1,28 +1,19 @@
 #ifndef CRISTALLGRAMMARMOEL_H
 #define CRISTALLGRAMMARMOEL_H
 
-#include <vector>
-#include <cstdlib>
-#include <iostream>
-#include <cctype>
-#include <map>
 #include <string>
 
 #include "CristallHeader.h"
 
-using namespace Cristall;
-using namespace std;
 class CristallGrammarModel
 {
-
 public:
-    RuleType RuleTypes;
+    Cristall::RuleType RuleTypes;
     int Limit;
-    Rules RuleGroup;
-    string Label;
-    string StartChar;
-    string EndChar;
-    RunRuleInside RunRule;
-
+    Cristall::Rules RuleGroup;
+    std::string Label;
+    std::string StartChar;
+    std::string EndChar;
+    Cristall::RunRuleInside RunRule;
 };
 #endif

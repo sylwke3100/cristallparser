@@ -1,28 +1,19 @@
 #ifndef CRISTALLVALUESMODEL
 #define CRISTALLVALUESMODEL
-#include <map>
-#include <iostream>
-#include <cctype>
-#include <map>
-#include <sstream>
-#include "CristallHeader.h"
 
-using namespace Cristall;
-using namespace std;
+#include <string>
 
 enum class ModelReciv
 {
-    Normal = 0,
-    Open = 1,
-    Close = 2
+    Normal,
+    Open,
+    Close
 };
 
-class CristallValuesModel
+struct CristallValuesModel
 {
-
-public:
-    string Value;
-    string Label;
+    std::string Value;
+    std::string Label;
     ModelReciv Type;
 };
 
