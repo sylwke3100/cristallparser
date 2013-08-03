@@ -1,31 +1,25 @@
 #ifndef CRISTALLDETECTTOOLS_H
 #define CRISTALLDETECTTOOLS_H
 
-#include <vector>
-#include <cstdlib>
-#include <iostream>
-#include <cctype>
-#include <map>
-#include "CristallHeader.h"
+#include <string>
 
-using namespace std;
-using namespace Cristall;
+#include "CristallHeader.h"
 
 class CristallDetectTools
 {
 protected:
     enum class Types
     {
-        Coma = 3,
-        Minus = 4,
-        Alpha = 6,
-        Digit = 7,
-        None = 0
+        Coma,
+        Minus,
+        Alpha,
+        Digit,
+        None
     };
 
-    CristallDetectTools::Types detectInvoke(char& Val);
-    bool checkAlfanum(const string& str);
-    bool checkFloatnum(const string& str);
+    Types detectInvoke(char Val);
+    bool checkAlfanum(const std::string& str);
+    bool checkFloatnum(const std::string& str);
     char OPTION_SEPARATEDFLOAT = '.';
 };
 

@@ -1,15 +1,16 @@
 #include "CristallParser.h"
 
 using namespace std;
+using namespace Cristall;
 
 void CristallParser::setOptions(Options Option)
 {
     switch (Option)
     {
-    case Options::Option_ComaFloatSeparated:
+    case Options::ComaFloatSeparated:
         OPTION_SEPARATEDFLOAT = ',';
         break;
-    case Options::Option_DotFloatSeparated:
+    case Options::DotFloatSeparated:
         OPTION_SEPARATEDFLOAT = '.';
         break;
     }

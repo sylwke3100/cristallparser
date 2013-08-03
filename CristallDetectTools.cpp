@@ -1,6 +1,8 @@
 #include "CristallDetectTools.h"
 
-CristallDetectTools::Types CristallDetectTools::detectInvoke(char& Val)
+using namespace std;
+
+CristallDetectTools::Types CristallDetectTools::detectInvoke(char Val)
 {
     if (Val == OPTION_SEPARATEDFLOAT)
     {
@@ -25,6 +27,7 @@ bool CristallDetectTools::checkAlfanum(string const& str)
 {
     bool alpha {false};
     bool numerical {false};
+	
     for (auto const c : str)
     {
         if (!alpha && isalpha(c))
@@ -42,7 +45,8 @@ bool CristallDetectTools::checkAlfanum(string const& str)
 bool CristallDetectTools::checkFloatnum(const string& str)
 {
     bool digit {false};
-    for (auto const c : str)
+    
+	for (auto const c : str)
     {
         if (isdigit(c) && digit == false)
         {

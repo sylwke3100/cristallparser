@@ -1,7 +1,6 @@
 #ifndef CRISTALLHEADER_H
 #define CRISTALLHEADER_H
 
-
 namespace Cristall
 {
 
@@ -46,8 +45,8 @@ enum class RuleType
 
 enum class Options
 {
-    Option_ComaFloatSeparated,
-    Option_DotFloatSeparated
+    ComaFloatSeparated,
+    DotFloatSeparated
 };
 
 }

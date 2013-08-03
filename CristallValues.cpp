@@ -3,6 +3,7 @@
 #include "CristallValues.h"
 
 using namespace std;
+using namespace Cristall;
 
 int CristallValues::ConvertStringtoInt(string Data)
 {

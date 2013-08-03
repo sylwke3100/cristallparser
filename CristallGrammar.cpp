@@ -1,5 +1,8 @@
 #include "CristallGrammar.h"
 
+using namespace std;
+using namespace Cristall;
+
 void CristallGrammar::addGrammar(string Label, string Char)
 {
     CristallGrammarModel* OperationElement = new CristallGrammarModel;

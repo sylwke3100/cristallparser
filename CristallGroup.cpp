@@ -1,5 +1,7 @@
 #include "CristallGroup.h"
 
+using namespace std;
+
 void CristallGroup::addGroup(string GroupName)
 {
     if (this->isGroup(GroupName) == false && GroupName != "[empty]")

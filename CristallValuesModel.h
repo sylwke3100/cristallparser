@@ -3,11 +3,6 @@
 
 #include <string>
 
-#include "CristallHeader.h"
-
-using namespace Cristall;
-using namespace std;
-
 enum class ModelReciv
 {
     Normal,

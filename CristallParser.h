@@ -14,7 +14,7 @@ private:
     std::string RawData;
     void parseData(std::string RawData);
 public:
-    void setOptions(Options Option);
+    void setOptions(Cristall::Options Option);
     void setData(std::string Data);
     CristallValues run();
 };
