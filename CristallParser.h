@@ -1,28 +1,22 @@
 #ifndef CRISTALLPARSER_H
 #define CRISTALLPARSER_H
-#include <vector>
-#include <cstdlib>
-#include <iostream>
-#include <cctype>
-#include <map>
+
+#include <string>
+
 #include "CristallHeader.h"
 #include "CristallGrammar.h"
 #include "CristallValues.h"
 #include "CristallDetectTools.h"
-using namespace std;
-using namespace Cristall;
 
 class CristallParser : public CristallGrammar, CristallValues, CristallDetectTools
 {
 private:
-    string RawData;
-    void parseData(string RawData);
+    std::string RawData;
+    void parseData(std::string RawData);
 public:
     void setOptions(Options Option);
-    void setData(string Data);
+    void setData(std::string Data);
     CristallValues run();
-
-
 };
 
 #endif // CRISTALLPARSER_H

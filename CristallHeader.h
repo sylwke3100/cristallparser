@@ -7,44 +7,48 @@ namespace Cristall
 
 enum class Rules
 {
-    Numbers			= 0x1,
-    Letters			= 0x2,
-    FloatNumbers    = 0x4,
-    AlphaNumeric	= Rules::Numbers | Rules::Letters
+    Numbers      = 0x1,
+    Letters      = 0x2,
+    FloatNumbers = 0x4,
+    AlphaNumeric = Rules::Numbers | Rules::Letters
 };
 
 enum class Limits
 {
-    None = 0
+    None
 };
 
 enum class DataType
 {
-    Label = 0,
-    Value = 1
+    Label,
+    Value
 };
 
 enum class RunRuleInside
 {
-    Yes = 1,
-    No = 0
+    No,
+	Yes
 };
+
 enum class SearchType
 {
-    FullText = 0,
-    Inside = 1,
-    Any = 2
+    FullText,
+    Inside,
+    Any
 };
+
 enum class RuleType
 {
-    SingleRule = 0,
-    MultiRule =  1,
-    SpecialRule = 2
+    SingleRule,
+    MultiRule,
+    SpecialRule
 };
+
 enum class Options
 {
-    Option_ComaFloatSeparated = 0,
-    Option_DotFloatSeparated = 1
+    Option_ComaFloatSeparated,
+    Option_DotFloatSeparated
 };
+
 }
 #endif

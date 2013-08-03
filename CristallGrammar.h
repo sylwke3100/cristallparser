@@ -1,29 +1,31 @@
 #ifndef CRISTALLGRAMMAR_H
 #define CRISTALLGRAMMAR_H
+
 #include <vector>
 #include <cstdlib>
 #include <iostream>
 #include <cctype>
 #include <map>
+
 #include "CristallHeader.h"
 #include "CristallValues.h"
 #include "CristallGroup.h"
 #include "CristallGrammarModel.h"
-using namespace std;
 
+using namespace std;
 using namespace Cristall;
-class CristallGrammar: public CristallGroup
+
+class CristallGrammar : public CristallGroup
 {
 public:
-    void addGrammar(string Label,string Char);
-    void addGrammar(int GroupID,string Char);
-    void addGrammarTo(string Label, string StartChar, string EndChar,RunRuleInside Rule);
-    void addGrammarTo(int GroupID, string StartChar, string EndChar,RunRuleInside Rule);
+    void addGrammar(string Label, string Char);
+    void addGrammar(int GroupID, string Char);
+    void addGrammarTo(string Label, string StartChar, string EndChar, RunRuleInside Rule);
+    void addGrammarTo(int GroupID, string StartChar, string EndChar, RunRuleInside Rule);
     void addRule(string const& YourName, Cristall::Rules Rule, int Limit);
 
 protected:
-    vector <CristallGrammarModel> OperationList;
-private:
+    vector<CristallGrammarModel> OperationList;
 };
 
 #endif // CRISTALLGRAMMAR_H

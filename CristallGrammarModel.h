@@ -12,9 +12,9 @@
 
 using namespace Cristall;
 using namespace std;
+
 class CristallGrammarModel
 {
-
 public:
     RuleType RuleTypes;
     int Limit;
@@ -23,6 +23,5 @@ public:
     string StartChar;
     string EndChar;
     RunRuleInside RunRule;
-
 };
 #endif
