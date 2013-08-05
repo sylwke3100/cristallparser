@@ -10,11 +10,13 @@ enum class ModelReciv
     Close
 };
 
-struct CristallValuesModel
+class CristallValuesModel
 {
+    public:
     std::string Value;
     std::string Label;
     ModelReciv Type;
+    CristallValuesModel (std::string Value, std::string Label, ModelReciv Type);
 };
 
 #endif

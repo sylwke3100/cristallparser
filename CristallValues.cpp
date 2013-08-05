@@ -54,10 +54,7 @@ void CristallValues::loadData(const vector<CristallValuesModel>& Data)
 
 void CristallValues::addElement(string Label, string Value, ModelReciv Reciv)
 {
-    CristallValuesModel Model;
-    Model.Label = Label;
-    Model.Value = Value;
-    Model.Type = Reciv;
+    CristallValuesModel Model(Value, Label, Reciv );
     Summary.push_back(Model);
 }
 
