@@ -6,6 +6,7 @@ namespace Cristall
 
 enum class Rules
 {
+    None         = 0x0,
     Numbers      = 0x1,
     Letters      = 0x2,
     FloatNumbers = 0x4,

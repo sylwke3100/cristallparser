@@ -5,13 +5,8 @@ using namespace Cristall;
 
 void CristallGrammar::addGrammar(string Label, string Char)
 {
-    CristallGrammarModel* OperationElement = new CristallGrammarModel;
-    OperationElement->Label = Label;
-    OperationElement->StartChar = Char;
-    OperationElement->RunRule = RunRuleInside::No;
-    OperationElement->RuleTypes = RuleType::SingleRule;
-    OperationList.push_back(*OperationElement);
-    delete OperationElement;
+    CristallGrammarModel OperationElement(RuleType::SingleRule, Rules::None, Label, Char, "",RunRuleInside::No, 0);
+   OperationList.push_back(OperationElement);
 }
 
 void CristallGrammar::addGrammar(int GroupID, string Char)
@@ -25,14 +20,8 @@ void CristallGrammar::addGrammar(int GroupID, string Char)
 
 void CristallGrammar::addGrammarTo(string Label, string StartChar, string EndChar, RunRuleInside Rule)
 {
-    CristallGrammarModel* OperationElement = new CristallGrammarModel;
-    OperationElement->Label = Label;
-    OperationElement->StartChar = StartChar;
-    OperationElement->EndChar = EndChar;
-    OperationElement->RunRule = Rule;
-    OperationElement->RuleTypes = RuleType::MultiRule;
-    OperationList.push_back(*OperationElement);
-    delete OperationElement;
+   CristallGrammarModel OperationElement(RuleType::MultiRule, Rules::None, Label, StartChar, EndChar, Rule, 0);
+   OperationList.push_back(OperationElement);
 }
 
 void CristallGrammar::addGrammarTo(int GroupID , string StartChar, string EndChar, RunRuleInside Rule)
@@ -46,12 +35,6 @@ void CristallGrammar::addGrammarTo(int GroupID , string StartChar, string EndCha
 
 void CristallGrammar::addRule(string const& YourName, Rules Rule, int Limit)
 {
-    CristallGrammarModel* OperationElement = new CristallGrammarModel;
-    OperationElement->Label = YourName;
-    OperationElement->Limit = Limit;
-    OperationElement->RuleGroup = Rule;
-    OperationElement->RunRule = RunRuleInside::No;
-    OperationElement->RuleTypes = RuleType::SpecialRule;
-    OperationList.push_back(*OperationElement);
-    delete OperationElement;
+    CristallGrammarModel OperationElement(RuleType::SpecialRule, Rule, YourName, "", "", RunRuleInside::No, 0);
+   OperationList.push_back(OperationElement);
 }

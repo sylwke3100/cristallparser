@@ -7,6 +7,7 @@ set (libCristallParserSrc
 		CristallValues.cpp
 		CristallGroup.cpp
 		CristallDetectTools.cpp
+		CristallGrammarModel.cpp
 	)
 set (libCristallParserHeader
 		CristallGrammar.h
