@@ -35,6 +35,6 @@ void CristallGrammar::addGrammarTo(int GroupID , string StartChar, string EndCha
 
 void CristallGrammar::addRule(string const& YourName, Rules Rule, int Limit)
 {
-    CristallGrammarModel OperationElement(RuleType::SpecialRule, Rule, YourName, "", "", RunRuleInside::No, 0);
+    CristallGrammarModel OperationElement(RuleType::SpecialRule, Rule, YourName, "", "", RunRuleInside::No, Limit);
    OperationList.push_back(OperationElement);
 }

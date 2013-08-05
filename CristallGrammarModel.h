@@ -15,7 +15,6 @@ public:
     std::string StartChar;
     std::string EndChar;
     Cristall::RunRuleInside RunRule;
-
     CristallGrammarModel(Cristall::RuleType RuleTypes,  Cristall::Rules RuleGroup ,std::string Label, std::string StartChar, std::string EndChar, Cristall::RunRuleInside RunRule, int Limit );
 };
 #endif
