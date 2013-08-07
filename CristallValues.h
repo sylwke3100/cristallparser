@@ -9,9 +9,7 @@
 
 struct CristallValues
 {
-    int ConvertStringtoInt(std::string Data);
     int size();
-    std::string ConvertInttoString(int Data);
     std::string getElement(int Id, Cristall::DataType Data);
     void loadData(const std::vector<CristallValuesModel>& Data);
     CristallValues search(std::string What, Cristall::DataType Data, Cristall::SearchType How);
