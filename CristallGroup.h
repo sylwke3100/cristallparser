@@ -3,13 +3,14 @@
 
 #include <string>
 #include <vector>
+#include <iterator>
 
 class CristallGroup
 {
 public:
     void addGroup(std::string GroupName);
     std::string getGroup(int GroupID);
-
+    int getIdGroup(std::string GroupName);
 protected:
     std::vector<std::string> GroupList;
 

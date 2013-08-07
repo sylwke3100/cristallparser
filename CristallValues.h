@@ -7,8 +7,9 @@
 #include "CristallHeader.h"
 #include "CristallValuesModel.h"
 
-struct CristallValues
+class CristallValues
 {
+public:
     int size();
     std::string getElement(int Id, Cristall::DataType Data);
     void loadData(const std::vector<CristallValuesModel>& Data);
