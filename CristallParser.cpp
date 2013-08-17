@@ -92,7 +92,7 @@ void  CristallParser::parseData(string RawData)
                             if ((inv == Rules::AlphaNumeric && checkAlfanum(digitalpha) == true) ||
 								((inv == Rules::Letters && checkAlfanum(digitalpha) == false && checkFloatnum(digitalpha) == false)
 									|| (inv == Rules::FloatNumbers && checkFloatnum(digitalpha) == true)) ||
-								(inv == Rules::Numbers && checkAlfanum(digitalpha) == false && (int)digitalpha.find('.') == -1))
+								(inv == Rules::Numbers && checkAlfanum(digitalpha) == false && (int)digitalpha.find(OPTION_SEPARATEDFLOAT) == -1))
                             {
                                 addElement(element.Label, digitalpha, ModelReciv::Normal);
                                 pos = id;
