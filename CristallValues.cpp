@@ -30,10 +30,17 @@ void CristallValues::loadData(const vector<CristallValuesModel>& Data)
     Summary = Data;
 }
 
-void CristallValues::addElement(string Label, string Value, ModelReciv Reciv)
+void CristallValues::addElement(std::string Label, std::string Value, ModelReciv Reciv)
 {
-    CristallValuesModel Model(Value, Label, Reciv );
+    CristallValuesModel Model(Label, Reciv );
+    if (!Value.empty())
+        Model.setValue(Value);
     Summary.push_back(Model);
+}
+
+void CristallValues::addElement(std::string Label, ModelReciv Reciv)
+{
+    addElement(Label, "", Reciv);
 }
 
 CristallValues CristallValues::search(string What, DataType Data, SearchType How)

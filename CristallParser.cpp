@@ -29,12 +29,12 @@ void  CristallParser::parseData(string RawData)
     {
         for (auto element : OperationList)
         {
-            if (element.RuleTypes == RuleType::SingleRule && RawData.substr(pos, element.StartChar.length()) == element.StartChar)
+            if (isSingleRule(element, RawData, pos))
             {
                 addElement(element.Label, element.StartChar, ModelReciv::Normal);
                 pos += element.Label.length();
             }
-            else if (element.RuleTypes == RuleType::MultiRule && RawData.substr(pos, element.StartChar.length()) == element.StartChar)
+            else if (isMultiRule(element, RawData, pos))
             {
                 int po = (int)RawData.find(element.EndChar, pos + element.StartChar.length() + 1);
                 if (po > pos + element.StartChar.length())
@@ -45,10 +45,10 @@ void  CristallParser::parseData(string RawData)
                     }
                     if (element.RunRule == RunRuleInside::Yes)
                     {
-                        addElement(element.Label, "", ModelReciv::Open);
+                        addElement(element.Label, ModelReciv::Open);
                         string RawValue = RawData.substr(pos + element.StartChar.length(), po - (pos + element.StartChar.length()));
                         parseData(RawValue);
-                        addElement(element.Label, "", ModelReciv::Close);
+                        addElement(element.Label, ModelReciv::Close);
                     }
                     pos = po + element.EndChar.length() - 1;
                 }
@@ -89,9 +89,9 @@ void  CristallParser::parseData(string RawData)
                     case Types::None:
                         if (digitalpha.length() > 0 && (digitalpha.length() == Limit || Limit == (int)Limits::None))
                         {
-                            if ((inv == Rules::AlphaNumeric && checkAlfanum(digitalpha) == true) || 
-								((inv == Rules::Letters && checkAlfanum(digitalpha) == false && checkFloatnum(digitalpha) == false) 
-									|| (inv == Rules::FloatNumbers && checkFloatnum(digitalpha) == true)) || 
+                            if ((inv == Rules::AlphaNumeric && checkAlfanum(digitalpha) == true) ||
+								((inv == Rules::Letters && checkAlfanum(digitalpha) == false && checkFloatnum(digitalpha) == false)
+									|| (inv == Rules::FloatNumbers && checkFloatnum(digitalpha) == true)) ||
 								(inv == Rules::Numbers && checkAlfanum(digitalpha) == false && (int)digitalpha.find('.') == -1))
                             {
                                 addElement(element.Label, digitalpha, ModelReciv::Normal);

@@ -19,7 +19,6 @@ bool CristallDetectTools::checkAlfanum(string const& str)
 {
     bool alpha {false};
     bool numerical {false};
-
     for (auto const c : str)
     {
         if (!alpha && isalpha(c))
@@ -33,7 +32,6 @@ bool CristallDetectTools::checkAlfanum(string const& str)
 bool CristallDetectTools::checkFloatnum(const string& str)
 {
     bool digit {false};
-
 	for (auto const c : str)
     {
         if (isdigit(c) && digit == false)
@@ -42,4 +40,20 @@ bool CristallDetectTools::checkFloatnum(const string& str)
             return true;
     }
     return false;
+}
+
+bool CristallDetectTools::isSingleRule(CristallGrammarModel element, const std::string& RawData, int pos)
+{
+    if (element.RuleTypes == Cristall::RuleType::SingleRule && RawData.substr(pos, element.StartChar.length()) == element.StartChar)
+        return true;
+    else
+        return false;
+}
+
+bool CristallDetectTools::isMultiRule(CristallGrammarModel element, const std::string& RawData, int pos)
+{
+    if (element.RuleTypes == Cristall::RuleType::MultiRule && RawData.substr(pos, element.StartChar.length()) == element.StartChar)
+        return true;
+    else
+        return false;
 }

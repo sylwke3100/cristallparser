@@ -16,7 +16,8 @@ class CristallValuesModel
     std::string Value;
     std::string Label;
     ModelReciv Type;
-    CristallValuesModel (std::string Value, std::string Label, ModelReciv Type);
+    CristallValuesModel (std::string Label, ModelReciv Type);
+    void setValue(std::string Value);
 };
 
 #endif

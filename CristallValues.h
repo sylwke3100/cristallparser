@@ -15,6 +15,7 @@ public:
     void loadData(const std::vector<CristallValuesModel>& Data);
     CristallValues search(std::string What, Cristall::DataType Data, Cristall::SearchType How);
     void addElement(std::string Label, std::string Value, ModelReciv Reciv);
+    void addElement(std::string Label, ModelReciv Reciv);
     void clear();
     std::vector<CristallValuesModel> Summary;
 };
