@@ -1,8 +1,8 @@
-#include "CristallDetectTools.h"
+#include "CristallDetectRules.h"
 
 using namespace std;
 
-CristallDetectTools::Types CristallDetectTools::detectInvoke(char Val)
+CristallDetectRules::Types CristallDetectRules::detectInvoke(char Val)
 {
     if (Val == OPTION_SEPARATEDFLOAT)
         return Types::Coma;
@@ -15,7 +15,7 @@ CristallDetectTools::Types CristallDetectTools::detectInvoke(char Val)
     return Types::None;
 }
 
-bool CristallDetectTools::checkAlfanum(string const& str)
+bool CristallDetectRules::checkAlfanum(string const& str)
 {
     bool alpha {false};
     bool numerical {false};
@@ -29,7 +29,7 @@ bool CristallDetectTools::checkAlfanum(string const& str)
     return numerical && alpha;
 }
 
-bool CristallDetectTools::checkFloatnum(const string& str)
+bool CristallDetectRules::checkFloatnum(const string& str)
 {
     bool digit {false};
 	for (auto const c : str)
@@ -42,7 +42,7 @@ bool CristallDetectTools::checkFloatnum(const string& str)
     return false;
 }
 
-bool CristallDetectTools::isSingleRule(CristallGrammarModel element, const std::string& RawData, int pos)
+bool CristallDetectRules::isSingleRule(CristallGrammarModel element, const std::string& RawData, int pos)
 {
     if (element.RuleTypes == Cristall::RuleType::SingleRule && RawData.substr(pos, element.StartChar.length()) == element.StartChar)
         return true;
@@ -50,7 +50,7 @@ bool CristallDetectTools::isSingleRule(CristallGrammarModel element, const std::
         return false;
 }
 
-bool CristallDetectTools::isMultiRule(CristallGrammarModel element, const std::string& RawData, int pos)
+bool CristallDetectRules::isMultiRule(CristallGrammarModel element, const std::string& RawData, int pos)
 {
     if (element.RuleTypes == Cristall::RuleType::MultiRule && RawData.substr(pos, element.StartChar.length()) == element.StartChar)
         return true;

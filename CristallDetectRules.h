@@ -5,7 +5,7 @@
 
 #include "CristallHeader.h"
 #include "CristallGrammarModel.h"
-class CristallDetectTools
+class CristallDetectRules
 {
 protected:
     enum class Types

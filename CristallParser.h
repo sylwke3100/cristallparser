@@ -6,9 +6,9 @@
 #include "CristallHeader.h"
 #include "CristallGrammar.h"
 #include "CristallValues.h"
-#include "CristallDetectTools.h"
+#include "CristallDetectRules.h"
 
-class CristallParser : public CristallGrammar, CristallValues, CristallDetectTools
+class CristallParser : public CristallGrammar, CristallValues, CristallDetectRules
 {
 private:
     std::string RawData;
