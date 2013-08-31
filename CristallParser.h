@@ -12,7 +12,10 @@ class CristallParser : public CristallGrammar, CristallValues, CristallDetectRul
 {
 private:
     std::string RawData;
+    bool isAnyNumbers(Cristall::Rules Rule);
     void parseData(std::string RawData);
+    void parseSingleRule(CristallGrammarModel Model, int &CurrentPosiotion);
+    void parseMultiRule(CristallGrammarModel Model, int &CurrentPosiotion);
 public:
     void setOptions(Cristall::Options Option);
     void setData(std::string Data);

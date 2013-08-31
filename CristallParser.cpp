@@ -14,12 +14,41 @@ void CristallParser::setOptions(Options Option)
         OPTION_SEPARATEDFLOAT = '.';
         break;
     }
-
 }
 
 void CristallParser::setData(string Data)
 {
     RawData = Data;
+}
+
+void CristallParser::parseSingleRule(CristallGrammarModel Model, int& CurrentPosiotion)
+{
+    addElement(Model.Label, Model.StartChar, ModelReciv::Normal);
+    CurrentPosiotion += Model.Label.length();
+}
+
+void CristallParser::parseMultiRule(CristallGrammarModel Model, int& CurrentPosiotion)
+{
+    int EndCharPosition = (int)RawData.find(Model.EndChar, CurrentPosiotion + Model.StartChar.length() + 1);
+    if (EndCharPosition > CurrentPosiotion + Model.StartChar.length())
+        if (Model.RunRule == RunRuleInside::No)
+            addElement(Model.Label, RawData.substr(CurrentPosiotion + Model.StartChar.length(), EndCharPosition - (CurrentPosiotion + Model.StartChar.length())), ModelReciv::Open);
+        else if (Model.RunRule == RunRuleInside::Yes)
+        {
+            addElement(Model.Label, ModelReciv::Open);
+            string RawValue = RawData.substr(CurrentPosiotion + Model.StartChar.length(), EndCharPosition - (CurrentPosiotion + Model.StartChar.length()));
+            parseData(RawValue);
+            addElement(Model.Label, ModelReciv::Close);
+        }
+    CurrentPosiotion = EndCharPosition + Model.EndChar.length() - 1;
+}
+
+bool CristallParser::isAnyNumbers(Rules Rule)
+{
+    if (Rule == Rules::Numbers || Rule== Rules::FloatNumbers)
+        return true;
+    else
+        return false;
 }
 
 void  CristallParser::parseData(string RawData)
@@ -30,58 +59,38 @@ void  CristallParser::parseData(string RawData)
         for (auto element : OperationList)
         {
             if (isSingleRule(element, RawData, pos))
-            {
-                addElement(element.Label, element.StartChar, ModelReciv::Normal);
-                pos += element.Label.length();
-            }
+                parseSingleRule(element,pos);
             else if (isMultiRule(element, RawData, pos))
-            {
-                int po = (int)RawData.find(element.EndChar, pos + element.StartChar.length() + 1);
-                if (po > pos + element.StartChar.length())
-                {
-                    if (element.RunRule == RunRuleInside::No)
-                    {
-                        addElement(element.Label, RawData.substr(pos + element.StartChar.length(), po - (pos + element.StartChar.length())), ModelReciv::Open);
-                    }
-                    if (element.RunRule == RunRuleInside::Yes)
-                    {
-                        addElement(element.Label, ModelReciv::Open);
-                        string RawValue = RawData.substr(pos + element.StartChar.length(), po - (pos + element.StartChar.length()));
-                        parseData(RawValue);
-                        addElement(element.Label, ModelReciv::Close);
-                    }
-                    pos = po + element.EndChar.length() - 1;
-                }
-            }
+                parseMultiRule(element, pos);
             else if (element.RuleTypes == RuleType::SpecialRule && detectInvoke(RawData[pos]) != Types::None)
             {
                 digitalpha.clear();
-                Rules inv = element.RuleGroup;
+                Rules CurrentElementRule = element.RuleGroup;
                 int Limit = element.Limit;
                 for (int id = pos; id <= RawData.length(); id++)
                 {
                     switch (detectInvoke(RawData[id]))
                     {
                     case Types::Alpha:
-                        if (inv == Rules::Letters || inv == Rules::AlphaNumeric)
+                        if (CurrentElementRule == Rules::Letters || CurrentElementRule == Rules::AlphaNumeric)
                         {
                             digitalpha += RawData[id];
                         }
                         break;
                     case Types::Digit:
-                        if (inv == Rules::Numbers || inv == Rules::FloatNumbers)
+                        if (isAnyNumbers(CurrentElementRule))
                         {
                             digitalpha += RawData[id];
                         }
                         break;
                     case Types::Coma:
-                        if ((inv == Rules::FloatNumbers  || inv == Rules::Numbers) && digitalpha.length() >= 1)
+                        if ((CurrentElementRule == Rules::FloatNumbers ) && digitalpha.length() >= 1)
                         {
                             digitalpha += OPTION_SEPARATEDFLOAT;
                         }
                         break;
                     case Types::Minus:
-                        if ((inv == Rules::FloatNumbers  || inv == Rules::Numbers) && digitalpha.length() == 0)
+                        if (isAnyNumbers(CurrentElementRule) && digitalpha.empty())
                         {
                             digitalpha += RawData[id];
                         }
@@ -89,10 +98,10 @@ void  CristallParser::parseData(string RawData)
                     case Types::None:
                         if (digitalpha.length() > 0 && (digitalpha.length() == Limit || Limit == (int)Limits::None))
                         {
-                            if ((inv == Rules::AlphaNumeric && checkAlfanum(digitalpha) == true) ||
-								((inv == Rules::Letters && checkAlfanum(digitalpha) == false && checkFloatnum(digitalpha) == false)
-									|| (inv == Rules::FloatNumbers && checkFloatnum(digitalpha) == true)) ||
-								(inv == Rules::Numbers && checkAlfanum(digitalpha) == false && (int)digitalpha.find(OPTION_SEPARATEDFLOAT) == -1))
+                            if ((CurrentElementRule == Rules::AlphaNumeric && checkAlfanum(digitalpha) == true) ||
+                                    ((CurrentElementRule == Rules::Letters && checkAlfanum(digitalpha) == false && checkFloatnum(digitalpha) == false)
+                                     || (CurrentElementRule == Rules::FloatNumbers && checkFloatnum(digitalpha) == true)) ||
+                                    (CurrentElementRule == Rules::Numbers && checkAlfanum(digitalpha) == false && (int)digitalpha.find(OPTION_SEPARATEDFLOAT) == -1))
                             {
                                 addElement(element.Label, digitalpha, ModelReciv::Normal);
                                 pos = id;
