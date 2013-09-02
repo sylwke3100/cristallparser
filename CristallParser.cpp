@@ -40,7 +40,7 @@ void CristallParser::parseMultiRule(CristallGrammarModel Model, int& CurrentPosi
             parseData(RawValue);
             addElement(Model.Label, ModelReciv::Close);
         }
-    CurrentPosiotion = EndCharPosition + Model.EndChar.length() - 1;
+    CurrentPosiotion = EndCharPosition + Model.EndChar.length() ;
 }
 
 bool CristallParser::isAnyNumbers(Rules Rule)
