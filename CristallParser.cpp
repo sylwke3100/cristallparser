@@ -3,6 +3,13 @@
 using namespace std;
 using namespace Cristall;
 
+
+void CristallParser::loadParser(std::string parserName)
+{
+    Extensions.load(parserName);
+}
+
+
 void CristallParser::setOptions(Options Option)
 {
     switch (Option)
@@ -123,8 +130,12 @@ void  CristallParser::parseData(string RawData)
 
 CristallValues CristallParser::run()
 {
-    parseData(this->RawData);
     CristallValues Vals;
-    Vals.loadData(Summary);
+    if(Extensions.isLoad())
+        Extensions.parse(OperationList, Vals, this->RawData);
+    else{
+        parseData(this->RawData);
+        Vals.loadData(Summary);
+    }
     return Vals;
 }
