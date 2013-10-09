@@ -9,7 +9,7 @@ void CristallGrammar::addGrammar(string Label, string Char)
    OperationList.push_back(OperationElement);
 }
 
-void CristallGrammar::addGrammar(int GroupID, string Char)
+void CristallGrammar::addGrammarByGroup(int GroupID, string Char)
 {
     string GroupName = getGroup(GroupID);
     if (GroupName != "[empty]")
@@ -24,7 +24,7 @@ void CristallGrammar::addGrammarTo(string Label, string StartChar, string EndCha
    OperationList.push_back(OperationElement);
 }
 
-void CristallGrammar::addGrammarTo(int GroupID , string StartChar, string EndChar, RunRuleInside Rule)
+void CristallGrammar::addGrammarToByGroup(int GroupID , string StartChar, string EndChar, RunRuleInside Rule)
 {
     string GroupName = getGroup(GroupID);
     if (GroupName != "[empty]")

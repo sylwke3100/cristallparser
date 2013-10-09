@@ -13,9 +13,9 @@ class CristallGrammar : public CristallGroup
 {
 public:
     void addGrammar(std::string Label, std::string Char);
-    void addGrammar(int GroupID, std::string Char);
+    void addGrammarByGroup(int GroupID, std::string Char);
     void addGrammarTo(std::string Label, std::string StartChar, std::string EndChar, Cristall::RunRuleInside Rule);
-    void addGrammarTo(int GroupID, std::string StartChar, std::string EndChar, Cristall::RunRuleInside Rule);
+    void addGrammarToByGroup(int GroupID, std::string StartChar, std::string EndChar, Cristall::RunRuleInside Rule);
     void addRule(std::string const& YourName, Cristall::Rules Rule, int Limit);
 
 protected:
