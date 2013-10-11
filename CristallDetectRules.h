@@ -21,6 +21,7 @@ protected:
     bool checkFloatnum(const std::string& str);
     bool isSingleRule(CristallGrammarModel element, const std::string & RawData, int pos);
     bool isMultiRule(CristallGrammarModel element, const std::string & RawData, int pos);
+    bool isAnyNumbers(Cristall::Rules Rule);
     char OPTION_SEPARATEDFLOAT = '.';
 };
 

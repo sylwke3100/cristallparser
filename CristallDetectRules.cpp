@@ -57,3 +57,11 @@ bool CristallDetectRules::isMultiRule(CristallGrammarModel element, const std::s
     else
         return false;
 }
+
+bool CristallDetectRules::isAnyNumbers(Cristall::Rules Rule)
+{
+    if (Rule == Cristall::Rules::Numbers || Rule== Cristall::Rules::FloatNumbers)
+        return true;
+    else
+        return false;
+}

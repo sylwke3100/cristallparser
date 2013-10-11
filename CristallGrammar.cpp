@@ -13,9 +13,7 @@ void CristallGrammar::addGrammarByGroup(int GroupID, string Char)
 {
     string GroupName = getGroup(GroupID);
     if (GroupName != "[empty]")
-    {
         addGrammar(GroupName, Char);
-    }
 }
 
 void CristallGrammar::addGrammarTo(string Label, string StartChar, string EndChar, RunRuleInside Rule)
@@ -28,9 +26,7 @@ void CristallGrammar::addGrammarToByGroup(int GroupID , string StartChar, string
 {
     string GroupName = getGroup(GroupID);
     if (GroupName != "[empty]")
-    {
         addGrammarTo(GroupName , StartChar, EndChar, Rule);
-    }
 }
 
 void CristallGrammar::addRule(string const& YourName, Rules Rule, int Limit)

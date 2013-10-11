@@ -43,17 +43,54 @@ void CristallParser::parseMultiRule(CristallGrammarModel Model, int& CurrentPosi
     CurrentPosiotion = EndCharPosition + Model.EndChar.length() - 1;
 }
 
-bool CristallParser::isAnyNumbers(Rules Rule)
+void CristallParser::parseAnySpecialRule(CristallGrammarModel Model, int &CurrentPosiotion)
 {
-    if (Rule == Rules::Numbers || Rule== Rules::FloatNumbers)
-        return true;
-    else
-        return false;
+    string digitalpha;
+    Rules CurrentElementRule = Model.RuleGroup;
+    int Limit = Model.Limit;
+    for (int id = CurrentPosiotion; id <= RawData.length(); id++)
+    {
+        switch (detectInvoke(RawData[id]))
+        {
+        case Types::Alpha:
+            if (CurrentElementRule == Rules::Letters || CurrentElementRule == Rules::AlphaNumeric )
+                digitalpha += RawData[id];
+            break;
+        case Types::Digit:
+            if (isAnyNumbers(CurrentElementRule) )
+                digitalpha += RawData[id];
+            break;
+        case Types::Coma:
+            if ((CurrentElementRule == Rules::FloatNumbers ) && digitalpha.length() >= 1)
+                digitalpha += OPTION_SEPARATEDFLOAT;
+            break;
+        case Types::Minus:
+            if (isAnyNumbers(CurrentElementRule) && digitalpha.empty())
+                digitalpha += RawData[id];
+            break;
+        case Types::None:
+            if (digitalpha.length() > 0 && (digitalpha.length() == Limit || Limit == (int)Limits::None))
+            {
+                if ((CurrentElementRule == Rules::AlphaNumeric && checkAlfanum(digitalpha) == true) ||
+                        ((CurrentElementRule == Rules::Letters && checkAlfanum(digitalpha) == false && checkFloatnum(digitalpha) == false)
+                         || (CurrentElementRule == Rules::FloatNumbers && checkFloatnum(digitalpha) == true)) ||
+                        (CurrentElementRule == Rules::Numbers && checkAlfanum(digitalpha) == false && (int)digitalpha.find(OPTION_SEPARATEDFLOAT) == -1))
+                {
+                    addElement(Model.Label, digitalpha, ModelReciv::Normal);
+                    CurrentPosiotion = id;
+                    id = RawData.length();
+                }
+                else
+                    id = RawData.length();
+            }
+            break;
+        }
+    }
 }
 
 void  CristallParser::parseData(string RawData)
 {
-    string digitalpha;
+
     for (int pos = 0; pos < RawData.length(); pos++)
     {
         for (auto element : OperationList)
@@ -63,60 +100,7 @@ void  CristallParser::parseData(string RawData)
             else if (isMultiRule(element, RawData, pos))
                 parseMultiRule(element, pos);
             else if (element.RuleTypes == RuleType::SpecialRule && detectInvoke(RawData[pos]) != Types::None)
-            {
-                digitalpha.clear();
-                Rules CurrentElementRule = element.RuleGroup;
-                int Limit = element.Limit;
-                for (int id = pos; id <= RawData.length(); id++)
-                {
-                    switch (detectInvoke(RawData[id]))
-                    {
-                    case Types::Alpha:
-                        if (CurrentElementRule == Rules::Letters || CurrentElementRule == Rules::AlphaNumeric)
-                        {
-                            digitalpha += RawData[id];
-                        }
-                        break;
-                    case Types::Digit:
-                        if (isAnyNumbers(CurrentElementRule))
-                        {
-                            digitalpha += RawData[id];
-                        }
-                        break;
-                    case Types::Coma:
-                        if ((CurrentElementRule == Rules::FloatNumbers ) && digitalpha.length() >= 1)
-                        {
-                            digitalpha += OPTION_SEPARATEDFLOAT;
-                        }
-                        break;
-                    case Types::Minus:
-                        if (isAnyNumbers(CurrentElementRule) && digitalpha.empty())
-                        {
-                            digitalpha += RawData[id];
-                        }
-                        break;
-                    case Types::None:
-                        if (digitalpha.length() > 0 && (digitalpha.length() == Limit || Limit == (int)Limits::None))
-                        {
-                            if ((CurrentElementRule == Rules::AlphaNumeric && checkAlfanum(digitalpha) == true) ||
-                                    ((CurrentElementRule == Rules::Letters && checkAlfanum(digitalpha) == false && checkFloatnum(digitalpha) == false)
-                                     || (CurrentElementRule == Rules::FloatNumbers && checkFloatnum(digitalpha) == true)) ||
-                                    (CurrentElementRule == Rules::Numbers && checkAlfanum(digitalpha) == false && (int)digitalpha.find(OPTION_SEPARATEDFLOAT) == -1))
-                            {
-                                addElement(element.Label, digitalpha, ModelReciv::Normal);
-                                pos = id;
-                                id = RawData.length();
-                            }
-                            else
-                            {
-                                id = RawData.length();
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-
+                parseAnySpecialRule(element, pos);
         }
     }
 }
