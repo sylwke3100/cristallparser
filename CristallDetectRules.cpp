@@ -15,7 +15,7 @@ CristallDetectRules::Types CristallDetectRules::detectInvoke(char Val)
     return Types::None;
 }
 
-bool CristallDetectRules::checkAlfanum(string const& str)
+bool CristallDetectRules::checkAlfanum(const std::string & str)
 {
     bool alpha {false};
     bool numerical {false};
@@ -29,7 +29,7 @@ bool CristallDetectRules::checkAlfanum(string const& str)
     return numerical && alpha;
 }
 
-bool CristallDetectRules::checkFloatnum(const string& str)
+bool CristallDetectRules::checkFloatnum(const std::string& str)
 {
     bool digit {false};
 	for (auto const c : str)

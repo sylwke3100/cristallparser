@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void CristallGroup::addGroup(string GroupName)
+void CristallGroup::addGroup(std::string GroupName)
 {
     if (this->isGroup(GroupName) == false && GroupName != "[empty]")
         GroupList.push_back(GroupName);
@@ -18,7 +18,6 @@ string CristallGroup::getGroup(int GroupID)
 
 int CristallGroup::getIdGroup(std::string GroupName)
 {
-    int Index = 0;
     for (auto element = GroupList.begin(); element != GroupList.end(); ++element)
     {
         if (*element == GroupName)
@@ -27,7 +26,7 @@ int CristallGroup::getIdGroup(std::string GroupName)
     return -1;
 }
 
-bool CristallGroup::isGroup(string GroupName)
+bool CristallGroup::isGroup(std::string GroupName)
 {
     vector<string>::iterator element;
     for (auto element: GroupList)

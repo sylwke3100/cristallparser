@@ -3,7 +3,7 @@
 using namespace std;
 using namespace Cristall;
 
-void CristallParser::setOptions(Options Option)
+void CristallParser::setOptions(Cristall::Options Option)
 {
     switch (Option)
     {
@@ -16,7 +16,7 @@ void CristallParser::setOptions(Options Option)
     }
 }
 
-void CristallParser::setData(string Data)
+void CristallParser::setData(std::string Data)
 {
     RawData = Data;
 }
@@ -36,7 +36,7 @@ void CristallParser::parseMultiRule(CristallGrammarModel Model, int& CurrentPosi
         else if (Model.RunRule == RunRuleInside::Yes)
         {
             addElement(Model.Label, ModelReciv::Open);
-            string RawValue = RawData.substr(CurrentPosiotion + Model.StartChar.length(), EndCharPosition - (CurrentPosiotion + Model.StartChar.length()));
+            string RawValue = RawData.substr(CurrentPosiotion + Model.StartChar.length(), EndCharPosition - (CurrentPosiotion + Model.StartChar.length()) );
             parseData(RawValue);
             addElement(Model.Label, ModelReciv::Close);
         }
@@ -45,62 +45,60 @@ void CristallParser::parseMultiRule(CristallGrammarModel Model, int& CurrentPosi
 
 void CristallParser::parseAnySpecialRule(CristallGrammarModel Model, int &CurrentPosiotion)
 {
-    string digitalpha;
+    string ResultString;
     Rules CurrentElementRule = Model.RuleGroup;
-    int Limit = Model.Limit;
-    for (int id = CurrentPosiotion; id <= RawData.length(); id++)
+    for (int Index = CurrentPosiotion; Index <= RawData.length(); Index++)
     {
-        switch (detectInvoke(RawData[id]))
+        switch (detectInvoke(RawData[Index]))
         {
         case Types::Alpha:
             if (CurrentElementRule == Rules::Letters || CurrentElementRule == Rules::AlphaNumeric )
-                digitalpha += RawData[id];
+                ResultString += RawData[Index];
             break;
         case Types::Digit:
             if (isAnyNumbers(CurrentElementRule) )
-                digitalpha += RawData[id];
+                ResultString += RawData[Index];
             break;
         case Types::Coma:
-            if ((CurrentElementRule == Rules::FloatNumbers ) && digitalpha.length() >= 1)
-                digitalpha += OPTION_SEPARATEDFLOAT;
+            if ((CurrentElementRule == Rules::FloatNumbers ) && ResultString.length() >= 1)
+                ResultString += OPTION_SEPARATEDFLOAT;
             break;
         case Types::Minus:
-            if (isAnyNumbers(CurrentElementRule) && digitalpha.empty())
-                digitalpha += RawData[id];
+            if (isAnyNumbers(CurrentElementRule) && ResultString.empty())
+                ResultString += RawData[Index];
             break;
         case Types::None:
-            if (digitalpha.length() > 0 && (digitalpha.length() == Limit || Limit == (int)Limits::None))
+            if (ResultString.length() > 0 && (ResultString.length() == Model.Limit || Model.Limit == (int)Limits::None))
             {
-                if ((CurrentElementRule == Rules::AlphaNumeric && checkAlfanum(digitalpha) == true) ||
-                        ((CurrentElementRule == Rules::Letters && checkAlfanum(digitalpha) == false && checkFloatnum(digitalpha) == false)
-                         || (CurrentElementRule == Rules::FloatNumbers && checkFloatnum(digitalpha) == true)) ||
-                        (CurrentElementRule == Rules::Numbers && checkAlfanum(digitalpha) == false && (int)digitalpha.find(OPTION_SEPARATEDFLOAT) == -1))
+                if ((CurrentElementRule == Rules::AlphaNumeric && checkAlfanum(ResultString) == true) ||
+                        ((CurrentElementRule == Rules::Letters && checkAlfanum(ResultString) == false && checkFloatnum(ResultString) == false)
+                         || (CurrentElementRule == Rules::FloatNumbers && checkFloatnum(ResultString) == true)) ||
+                        (CurrentElementRule == Rules::Numbers && checkAlfanum(ResultString) == false && (int)ResultString.find(OPTION_SEPARATEDFLOAT) == -1))
                 {
-                    addElement(Model.Label, digitalpha, ModelReciv::Normal);
-                    CurrentPosiotion = id;
-                    id = RawData.length();
+                    addElement(Model.Label, ResultString, ModelReciv::Normal);
+                    CurrentPosiotion = Index;
+                    break;
                 }
                 else
-                    id = RawData.length();
+                    Index = RawData.length();
             }
             break;
         }
     }
 }
 
-void  CristallParser::parseData(string RawData)
+void  CristallParser::parseData(std::string RawData)
 {
-
-    for (int pos = 0; pos < RawData.length(); pos++)
+    for (int Position = 0; Position < RawData.length(); Position++)
     {
         for (auto element : OperationList)
         {
-            if (isSingleRule(element, RawData, pos))
-                parseSingleRule(element,pos);
-            else if (isMultiRule(element, RawData, pos))
-                parseMultiRule(element, pos);
-            else if (element.RuleTypes == RuleType::SpecialRule && detectInvoke(RawData[pos]) != Types::None)
-                parseAnySpecialRule(element, pos);
+            if (isSingleRule(element, RawData, Position))
+                parseSingleRule(element,Position);
+            else if (isMultiRule(element, RawData, Position))
+                parseMultiRule(element, Position);
+            else if (element.RuleTypes == RuleType::SpecialRule && detectInvoke(RawData[Position]) != Types::None)
+                parseAnySpecialRule(element, Position);
         }
     }
 }

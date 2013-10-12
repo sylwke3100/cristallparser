@@ -11,7 +11,7 @@ int CristallValues::size()
     return Summary.size();
 }
 
-string CristallValues::getElement(int Id, DataType Data)
+string CristallValues::getElement(int Id, Cristall::DataType Data)
 {
     switch (Data)
     {
@@ -25,7 +25,7 @@ string CristallValues::getElement(int Id, DataType Data)
     return Summary[Id].Label;
 }
 
-void CristallValues::loadData(const vector<CristallValuesModel>& Data)
+void CristallValues::loadData(const std::vector<CristallValuesModel>& Data)
 {
     Summary = Data;
 }
@@ -43,24 +43,20 @@ void CristallValues::addElement(std::string Label, ModelReciv Reciv)
     addElement(Label, "", Reciv);
 }
 
-CristallValues CristallValues::search(string What, DataType Data, SearchType How)
+CristallValues CristallValues::search(std::string What, Cristall::DataType Data, Cristall::SearchType How)
 {
-    CristallValues D;
+    CristallValues Result;
     int Index = 0;
     for (auto i : Summary)
     {
         if ((getElement(Index, Data) == What && How == SearchType::FullText)
                 || ((int)getElement(Index, Data).find(What) > -1 && How == SearchType::Inside))
-        {
-            D.addElement(getElement(Index, DataType::Label), getElement(Index, DataType::Value), ModelReciv::Normal);
-        }
+            Result.addElement(getElement(Index, DataType::Label), getElement(Index, DataType::Value), ModelReciv::Normal);
         else if ((getElement(Index, Data) == What || (int)getElement(Index, Data).find(What) > -1) && How == SearchType::Any)
-        {
-            D.addElement(getElement(Index, DataType::Label), getElement(Index, DataType::Value), ModelReciv::Normal);
-        }
+            Result.addElement(getElement(Index, DataType::Label), getElement(Index, DataType::Value), ModelReciv::Normal);
         Index++;
     }
-    return D;
+    return Result;
 }
 
 void CristallValues::clear()
