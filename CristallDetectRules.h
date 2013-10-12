@@ -7,7 +7,7 @@
 #include "CristallGrammarModel.h"
 class CristallDetectRules
 {
-protected:
+public:
     enum class Types
     {
         Coma,

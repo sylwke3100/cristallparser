@@ -36,7 +36,7 @@ bool CristallDetectRules::checkFloatnum(const std::string& str)
     {
         if (isdigit(c) && digit == false)
             digit = true;
-        if (OPTION_SEPARATEDFLOAT == c && digit == true)
+        if (OPTION_SEPARATEDFLOAT == c && digit == true && isdigit(str[str.length()-1]) )
             return true;
     }
     return false;
