@@ -77,7 +77,7 @@ void CristallParser::parseAnySpecialRule(CristallGrammarModel Model, int &Curren
                 {
                     addElement(Model.Label, ResultString, ModelReciv::Normal);
                     CurrentPosiotion = Index;
-                    break;
+                    Index = RawData.length();
                 }
                 else
                     Index = RawData.length();
