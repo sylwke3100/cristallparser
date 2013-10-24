@@ -44,24 +44,15 @@ bool CristallDetectRules::checkFloatnum(const std::string& str)
 
 bool CristallDetectRules::isSingleRule(CristallGrammarModel element, const std::string& RawData, int pos)
 {
-    if (element.RuleTypes == Cristall::RuleType::SingleRule && RawData.substr(pos, element.StartChar.length()) == element.StartChar)
-        return true;
-    else
-        return false;
+    return (element.RuleTypes == Cristall::RuleType::SingleRule && RawData.substr(pos, element.StartChar.length()) == element.StartChar);
 }
 
 bool CristallDetectRules::isMultiRule(CristallGrammarModel element, const std::string& RawData, int pos)
 {
-    if (element.RuleTypes == Cristall::RuleType::MultiRule && RawData.substr(pos, element.StartChar.length()) == element.StartChar)
-        return true;
-    else
-        return false;
+    return (element.RuleTypes == Cristall::RuleType::MultiRule && RawData.substr(pos, element.StartChar.length()) == element.StartChar);
 }
 
 bool CristallDetectRules::isAnyNumbers(Cristall::Rules Rule)
 {
-    if (Rule == Cristall::Rules::Numbers || Rule== Cristall::Rules::FloatNumbers)
-        return true;
-    else
-        return false;
+    return (Rule == Cristall::Rules::Numbers || Rule== Cristall::Rules::FloatNumbers);
 }
