@@ -13,9 +13,9 @@ class CristallParser : public CristallGrammar, CristallValues, CristallDetectRul
 private:
     std::string RawData;
     void parseData(std::string RawData);
-    void parseSingleRule(CristallGrammarModel Model, int &CurrentPosiotion);
-    void parseMultiRule(CristallGrammarModel Model, int &CurrentPosiotion);
-    void parseAnySpecialRule(CristallGrammarModel Model, int &CurrentPosiotion);
+    void parseSingleRule(CristallGrammarModel Model);
+    void parseMultiRule(CristallGrammarModel Model);
+    void parseAnySpecialRule(CristallGrammarModel Model);
 public:
     void setOptions(Cristall::Options Option);
     void setData(std::string Data);

@@ -19,9 +19,6 @@ public:
     Types detectInvoke(char Val);
     bool checkAlfanum(const std::string& str);
     bool checkFloatnum(const std::string& str);
-    bool isSingleRule(CristallGrammarModel element, const std::string & RawData, int pos);
-    bool isMultiRule(CristallGrammarModel element, const std::string & RawData, int pos);
-    bool isAnyNumbers(Cristall::Rules Rule);
     char OPTION_SEPARATEDFLOAT = '.';
 };
 
