@@ -17,7 +17,7 @@ void NumbersGrammar::parse(std::string& Text, std::vector<CristallStack>& LocalS
         else
             break;
         }
-    if (Limit == Element || (Limit == 0)){
+    if (Limit == Element || (Limit == 0)  ){
         LocalStack.push_back(this->getResult(boost::lexical_cast<int>(Text.substr(0,Element) ) ));
         Text.erase(0,Element);
     }

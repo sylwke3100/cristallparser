@@ -1,20 +1,20 @@
 #include "cristallparser.h"
 
-CristallParser::CristallParser(std::string &Text): T(Text){
+CristallParser::CristallParser(){
 
 }
 
-void CristallParser::parse(){
+void CristallParser::parse(std::string &Text){
 
-    while (this->T.size()>0){
+    while (Text.size()>0){
         bool detectRule = 0;
         for (auto El: Operations)
-            if(El->isRule(this->T)){
-                El->parse(this->T, this->GlobalStack);
+            if(El->isRule(Text)){
+                El->parse(Text, this->GlobalStack);
                 detectRule = 1;
             }
         if (!detectRule)
-            this->T.erase(this->T.begin());
+            Text.erase(Text.begin());
      }
 }
 void CristallParser::pushGrammar(Grammar *G){

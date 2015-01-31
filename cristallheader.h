@@ -1,6 +1,7 @@
 #ifndef CRISTALLHEADER_H
 #define CRISTALLHEADER_H
 
+
 namespace Cristall{
     enum class RunRuleInside{
         Yes,
